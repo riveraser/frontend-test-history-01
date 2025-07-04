@@ -1,52 +1,69 @@
-# Frontend Technical Test: Clinical Summary Dashboard
+# React + TypeScript + Vite
 
-Este proyecto es una solución para la prueba técnica de frontend, construida con una pila tecnológica moderna que incluye **Vite, React, TypeScript y Tailwind CSS**. El objetivo es demostrar habilidades en la construcción de interfaces de usuario modulares, dinámicas y estilizadas de manera eficiente, siguiendo las mejores prácticas de desarrollo y colaboración.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
----
+Currently, two official plugins are available:
 
-## 📄 El Desafío
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-El objetivo era implementar una interfaz de usuario basada en una historia de usuario y un diseño específico. La tarea principal consistía en crear cinco "widgets" o componentes para mostrar información de salud, con un enfoque en:
+## Expanding the ESLint configuration
 
--   **Componentización:** Crear componentes reutilizables y bien definidos.
--   **Renderizado Dinámico:** Los widgets de datos debían ser capaces de renderizar contenido a partir de una lista (array) de datos.
--   **Manejo de Estado de UI:** Implementar la lógica de navegación por pestañas en el widget de "Agregar dato de salud".
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
----
+```js
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-## 🛠️ Flujo de Trabajo y Colaboración (Git Workflow)
+      // Remove tseslint.configs.recommended and replace with this
+      ...tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      ...tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      ...tseslint.configs.stylisticTypeChecked,
 
-Para asegurar un proceso de desarrollo limpio y organizado, se siguió un flujo de trabajo basado en ramas:
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
 
-1.  **Rama Principal (`main`):** La rama `main` se mantiene siempre estable y desplegable. **No se realizan commits directos a esta rama.**
-2.  **Rama de Desarrollo (`develop`):** Se creó una rama `develop` a partir de `main` para concentrar el desarrollo de la funcionalidad.
-3.  **Merge Request / Pull Request:** Todo el código fue desarrollado en la rama `develop`. Una vez finalizado el trabajo, se creó un **Pull Request** de `develop` hacia `main` para formalizar la integración del código.
-    *   Este proceso simula un entorno de equipo donde el código es revisado antes de ser fusionado, garantizando la calidad y la estabilidad de la rama principal.
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
----
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-## 💻 Tech Stack & Decisiones Arquitectónicas
-
-Para este proyecto, elegí las siguientes tecnologías y patrones:
-
-*   **Build Tool:** **Vite**
-    *   **Por qué:** Vite ofrece una experiencia de desarrollo extremadamente rápida gracias a su servidor de desarrollo nativo ESM y Hot Module Replacement (HMR) instantáneo.
-
-*   **Framework:** **React**
-    *   **Por qué:** La arquitectura de React basada en componentes es ideal para desglosar la UI en "widgets" reutilizables.
-
-*   **Lenguaje:** **TypeScript**
-    *   **Por qué:** Utilicé TypeScript para añadir seguridad de tipos a todo el proyecto, definiendo interfaces para las `props` y los datos.
-
-*   **Estilos:** **Tailwind CSS**
-    *   **Por qué:** Su enfoque "utility-first" permite construir diseños complejos directamente en el JSX, acelerando el desarrollo y asegurando consistencia visual.
-
-*   **Estructura de Carpetas:**
-    ```
-    /src
-    ├── /assets         # Íconos SVG, imágenes, etc.
-    ├── /components     # Componentes reutilizables (Widget, Button, Tab, etc.)
-    ├── /features       # Componentes de alto nivel (HistorialClinico, Plan, etc.)
-    ├── /data           # Mocks de datos para simular las APIs
-    └── App.tsx         # Componente principal que orquesta la UI
-    ```
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
