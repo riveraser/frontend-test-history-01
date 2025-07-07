@@ -53,6 +53,7 @@ const CurrentTreatment: React.FC<CurrentTreatmentProps> = ({ data }) => {
             subtitle={item.posology}
             icon={item.icon as IconName}
             iconColor={item.iconColor}
+            details={item.details}
             onViewDetails={() => handleViewDetails(item)}
           />
         ))}
