@@ -1,5 +1,14 @@
-// TODO: Replace div templates with reusable components
-import React, { useState } from "react";
+import { useState } from "react";
+import ClinicalHistory from "./features/ClinicalHistory";
+import CurrentTreatment from "./features/CurrentTreatment";
+import Plan from "./features/Plan";
+import Paraclinical from "./features/Paraclinical";
+import {
+  clinicalHistoryData,
+  currentTreatmentData,
+  planData,
+  paraclinicalData,
+} from "./data/mockData";
 
 function App() {
   const [activeTab, setActiveTab] = useState("TODOS");
@@ -113,65 +122,17 @@ function App() {
           </div>
 
           {/* Widget 2: Historial clínico */}
-          <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
-            <div className="bg-green-600 px-4 py-3 flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <span className="text-white font-medium">📋</span>
-                <h3 className="text-white font-semibold text-sm">
-                  Historial clínico
-                </h3>
-              </div>
-            </div>
-            <div className="p-4">
-              <p className="text-gray-500 text-sm">
-                Contenido del historial clínico
-              </p>
-            </div>
-          </div>
+          <ClinicalHistory data={clinicalHistoryData} />
 
           {/* Widget 3: Tratamiento actual */}
-          <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
-            <div className="bg-purple-600 px-4 py-3 flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <span className="text-white font-medium">💊</span>
-                <h3 className="text-white font-semibold text-sm">
-                  Tratamiento actual
-                </h3>
-              </div>
-            </div>
-            <div className="p-4">
-              <p className="text-gray-500 text-sm">
-                Contenido del tratamiento actual
-              </p>
-            </div>
-          </div>
+          <CurrentTreatment data={currentTreatmentData} />
 
           {/* Widget 4: Plan */}
-          <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
-            <div className="bg-orange-600 px-4 py-3 flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <span className="text-white font-medium">📋</span>
-                <h3 className="text-white font-semibold text-sm">Plan</h3>
-              </div>
-            </div>
-            <div className="p-4">
-              <p className="text-gray-500 text-sm">Contenido del plan</p>
-            </div>
-          </div>
+          <Plan data={planData} />
 
           {/* Widget 5: Paraclínicos */}
-          <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden lg:col-span-2">
-            <div className="bg-red-600 px-4 py-3 flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <span className="text-white font-medium">🔬</span>
-                <h3 className="text-white font-semibold text-sm">
-                  Paraclínicos
-                </h3>
-              </div>
-            </div>
-            <div className="p-4">
-              <p className="text-gray-500 text-sm">Contenido de paraclínicos</p>
-            </div>
+          <div className="lg:col-span-2">
+            <Paraclinical data={paraclinicalData} />
           </div>
         </div>
       </div>

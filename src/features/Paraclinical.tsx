@@ -18,7 +18,7 @@ const Paraclinical: React.FC<ParaclinicalProps> = ({ data }) => {
   }
 
   return (
-    <Widget title="Paraclínicos" color="bg-organge-600" icon="🔬">
+    <Widget title="Paraclínicos" color="bg-orange-600" icon="🔬">
       <div className="space-y-3">
         {data.map((item) => (
           <div
