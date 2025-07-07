@@ -17,7 +17,7 @@ const ClinicalHistory: React.FC<ClinicalHistoryProps> = ({ data }) => {
     return (
       <Widget
         title="Historial clínico"
-        color="bg-green-600"
+        color="bg-blue-900"
         icon="📋"
         isExpanded={isExpanded}
         onToggle={handleToggle}
@@ -32,7 +32,7 @@ const ClinicalHistory: React.FC<ClinicalHistoryProps> = ({ data }) => {
   return (
     <Widget
       title="Historial clínico"
-      color="bg-green-600"
+      color="bg-blue-900"
       icon="📋"
       isExpanded={isExpanded}
       onToggle={handleToggle}
