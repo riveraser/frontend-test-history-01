@@ -32,6 +32,12 @@ export interface AccionItem {
   iconColor: string;
 }
 
+// This will enforce the type of the tab
+export type HealthDataTab =
+  | "TODOS"
+  | "DIAGNÓSTICO CIE-10"
+  | "HALLAZGOS CLÍNICOS";
+
 export interface WidgetProps {
   title: string;
   color: string;
