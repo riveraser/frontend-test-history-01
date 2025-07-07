@@ -38,21 +38,19 @@ export const clinicalHistoryData: ClinicalHistoryItem[] = [
 export const currentTreatmentData: TreatmentItem[] = [
   {
     id: "1",
-    name: "Metformina",
-    dose: "500mg",
-    posology: "1 tableta cada 8 horas",
+    name: "Ciprofloxacino",
+    dose: "500mg VO",
+    posology: "Cada 12 horas x 7 días",
+    icon: "cxCode",
+    iconColor: "text-[#B31B00]",
   },
   {
     id: "2",
-    name: "Losartán",
-    dose: "50mg",
-    posology: "1 tableta diaria",
-  },
-  {
-    id: "3",
-    name: "Atorvastatina",
-    dose: "20mg",
-    posology: "1 tableta diaria",
+    name: "Acetaminofén",
+    dose: "500mg VO",
+    posology: "Cada 8 horas x 5 días",
+    icon: "rxCode",
+    iconColor: "text-[#144CB9]",
   },
 ];
 
@@ -82,19 +80,12 @@ export const planData: PlanItem[] = [
 export const paraclinicalData: ParaclinicalItem[] = [
   {
     id: "1",
-    name: "Hemograma completo",
-    result: "Normal",
-  },
-  {
-    id: "2",
-    name: "Glicemia en ayunas",
-    result: "Elevada - 145 mg/dL",
+    name: "Glucemia en ayuno",
+    result: "101 mg/dl",
+    icon: "testTube",
+    iconColor: "text-[#A63AFF]",
     hasAlert: true,
-  },
-  {
-    id: "3",
-    name: "Perfil lipídico",
-    result: "Normal",
+    details: "Se recomienda realizar un seguimiento de la glucemia en ayuno.",
   },
 ];
 

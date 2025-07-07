@@ -10,6 +10,9 @@ export interface TreatmentItem {
   name: string;
   dose: string;
   posology: string;
+  details?: string;
+  icon?: string;
+  iconColor?: string;
 }
 
 export interface PlanItem {
@@ -27,6 +30,9 @@ export interface ParaclinicalItem {
   name: string;
   result: string;
   hasAlert?: boolean;
+  details?: string;
+  icon?: string;
+  iconColor?: string;
 }
 
 export interface AccionItem {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Widget from "@/components/Widget";
 import WidgetItem from "@/components/ui/WidgetItem";
 import type { TreatmentItem } from "@/types";
+import { IconName } from "@/assets/icons";
 
 interface CurrentTreatmentProps {
   data: TreatmentItem[];
@@ -23,11 +24,10 @@ const CurrentTreatment: React.FC<CurrentTreatmentProps> = ({ data }) => {
     return (
       <Widget
         title="Tratamiento actual"
-        color="bg-green-600"
-        icon="💊"
+        color="bg-(--treatment-header-bg) text-(--treatment-header-text)"
         isExpanded={isExpanded}
         onToggle={handleToggle}
-        isExpandable={true}
+        collapseColor="text-(--treatment-header-bg)"
       >
         <div className="text-center py-4">
           <p className="text-gray-500 text-sm">No hay datos para mostrar</p>
@@ -39,11 +39,11 @@ const CurrentTreatment: React.FC<CurrentTreatmentProps> = ({ data }) => {
   return (
     <Widget
       title="Tratamiento actual"
-      color="bg-green-600"
-      icon="💊"
+      color="bg-(--treatment-header-bg) text-(--treatment-header-text)"
       isExpanded={isExpanded}
       onToggle={handleToggle}
       isExpandable={true}
+      collapseColor="text-(--treatment-header-bg)"
     >
       <div className="space-y-3">
         {data.map((item) => (
@@ -51,8 +51,8 @@ const CurrentTreatment: React.FC<CurrentTreatmentProps> = ({ data }) => {
             key={item.id}
             title={`${item.name} ${item.dose}`}
             subtitle={item.posology}
-            icon="rxCode"
-            iconColor="text-green-600"
+            icon={item.icon as IconName}
+            iconColor={item.iconColor}
             onViewDetails={() => handleViewDetails(item)}
           />
         ))}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Widget from "@/components/Widget";
 import WidgetItem from "@/components/ui/WidgetItem";
 import type { ParaclinicalItem } from "@/types";
+import { IconName } from "@/assets/icons";
 
 interface ParaclinicalProps {
   data: ParaclinicalItem[];
@@ -16,18 +17,17 @@ const Paraclinical: React.FC<ParaclinicalProps> = ({ data }) => {
 
   const handleViewDetails = (item: ParaclinicalItem) => {
     console.log("Ver detalles de:", item);
-    // Aquí puedes implementar la lógica para mostrar detalles
+    // TODO: Implement the logic to view the details
   };
 
   if (data.length === 0) {
     return (
       <Widget
         title="Paraclínicos"
-        color="bg-orange-600"
-        icon="🔬"
+        color="bg-(--paraclinical-header-bg) text-(--paraclinical-header-text)"
         isExpanded={isExpanded}
         onToggle={handleToggle}
-        isExpandable={true}
+        collapseColor="text-(--paraclinical-header-bg)"
       >
         <div className="text-center py-4">
           <p className="text-gray-500 text-sm">No hay datos para mostrar</p>
@@ -39,11 +39,10 @@ const Paraclinical: React.FC<ParaclinicalProps> = ({ data }) => {
   return (
     <Widget
       title="Paraclínicos"
-      color="bg-orange-600"
-      icon="🔬"
+      color="bg-(--paraclinical-header-bg) text-(--paraclinical-header-text)"
       isExpanded={isExpanded}
       onToggle={handleToggle}
-      isExpandable={true}
+      collapseColor="text-(--paraclinical-header-bg)"
     >
       <div className="space-y-3">
         {data.map((item) => (
@@ -51,8 +50,10 @@ const Paraclinical: React.FC<ParaclinicalProps> = ({ data }) => {
             key={item.id}
             title={item.name}
             subtitle={item.result}
-            icon="testTube"
-            iconColor="text-orange-600"
+            subtitleClassName="text-(--widget-text-highlight)"
+            details={item.details}
+            icon={item.icon as IconName}
+            iconColor={item.iconColor}
             onViewDetails={() => handleViewDetails(item)}
           />
         ))}

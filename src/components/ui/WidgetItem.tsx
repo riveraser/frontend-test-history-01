@@ -13,6 +13,7 @@ interface WidgetItemProps {
   details?: string;
   onViewDetails?: () => void;
   className?: string;
+  subtitleClassName?: string;
 }
 
 const WidgetItem: React.FC<WidgetItemProps> = ({
@@ -24,13 +25,16 @@ const WidgetItem: React.FC<WidgetItemProps> = ({
   details,
   onViewDetails,
   className = "",
+  subtitleClassName = "",
 }) => {
+  const hasDetails = details && onViewDetails;
+
   return (
     <div
       className={`widget-item-glow flex items-stretch p-2 bg-gray-50 rounded-sm ${className}`}
     >
       {/* Primera columna: DateDisplay o Icon */}
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center flex-shrink-0">
         {date ? (
           <DateDisplay date={date} />
         ) : icon ? (
@@ -43,21 +47,16 @@ const WidgetItem: React.FC<WidgetItemProps> = ({
       </div>
 
       {/* Segunda columna: Contenido principal */}
-      <div className="flex items-center justify-center flex-1 px-4">
-        <div className="text-(--widget-text) text-md font-bold text-left">
+      <div className="flex items-center justify-center px-4 flex-1">
+        <div className="text-(--widget-text) text-md font-bold text-left w-full leading-tight ">
           {title}
-          {subtitle && (
-            <>
-              <br />
-              {subtitle}
-            </>
-          )}
+          {subtitle && <div className={`${subtitleClassName}`}>{subtitle}</div>}
         </div>
       </div>
 
       {/* Tercera columna: EyeButton (solo si hay details) */}
-      {details && onViewDetails && (
-        <div className="flex items-center justify-center">
+      {hasDetails && (
+        <div className="flex items-center justify-center flex-shrink-0">
           <EyeButton
             onClick={onViewDetails}
             size="lg"

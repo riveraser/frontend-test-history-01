@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Widget from "@/components/Widget";
 import WidgetItem from "@/components/ui/WidgetItem";
 import type { PlanItem } from "@/types";
+import { IconName } from "@/assets/icons";
 
 interface PlanProps {
   data: PlanItem[];
@@ -49,8 +50,8 @@ const Plan: React.FC<PlanProps> = ({ data }) => {
             key={item.id}
             title={`${item.name} ${item.dose}`}
             subtitle={item.posology}
-            icon="rxCode"
-            iconColor="text-blue-800"
+            icon={item.icon as IconName}
+            iconColor={item.iconColor}
             details={item.details}
             onViewDetails={() => handleViewDetails(item)}
           />
