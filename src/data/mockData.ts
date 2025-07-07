@@ -98,7 +98,7 @@ export const actionsAll: AccionItem[] = [
   { label: "Talla y/o peso", icon: "👁️", iconColor: "text-green-500" },
   { label: "Cirugía", icon: "✏️", iconColor: "text-blue-500" },
   { label: "Escala / Clasificación", icon: "⚠️", iconColor: "text-orange-500" },
-  { label: "Calculadora clínica", icon: "🧮", iconColor: "text-gray-500" },
+  { label: "Calculadora clínica", icon: "🔢", iconColor: "text-gray-500" },
 ];
 
 // Diagnóstico CIE-10

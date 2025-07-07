@@ -54,5 +54,5 @@ export interface TabProps {
 }
 
 export interface TabContentProps {
-  activeTab: string;
+  activeTab: HealthDataTab; // We are passing the type of the tab
 }

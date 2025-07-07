@@ -1,47 +1,36 @@
 import React from "react";
 import type { TabContentProps, HealthDataTab } from "../types";
+import {
+  actionsAll,
+  actionsIcd10Diagnosis,
+  clinicalFindingsActions,
+} from "../data/mockData";
 
 const TabContent: React.FC<TabContentProps> = ({ activeTab }) => {
-  const renderTodosContent = () => (
+  const renderActionButtons = (
+    actions: Array<{ label: string; icon: string; iconColor: string }>
+  ) => (
     <div className="grid grid-cols-2 gap-3">
-      <button className="p-3 bg-blue-50 hover:bg-blue-100 rounded-lg text-blue-700 font-medium text-sm transition-colors">
-        ❤️ Signos vitales
-      </button>
-      <button className="p-3 bg-green-50 hover:bg-green-100 rounded-lg text-green-700 font-medium text-sm transition-colors">
-        🧪 Dato de laboratorio
-      </button>
-      <button className="p-3 bg-purple-50 hover:bg-purple-100 rounded-lg text-purple-700 font-medium text-sm transition-colors">
-        👁️ Talla y/o peso
-      </button>
-      <button className="p-3 bg-orange-50 hover:bg-orange-100 rounded-lg text-orange-700 font-medium text-sm transition-colors">
-        ✏️ Cirugía
-      </button>
-      <button className="p-3 bg-red-50 hover:bg-red-100 rounded-lg text-red-700 font-medium text-sm transition-colors">
-        ⚠️ Escala / Clasificación
-      </button>
-      <button className="p-3 bg-indigo-50 hover:bg-indigo-100 rounded-lg text-indigo-700 font-medium text-sm transition-colors">
-        🧮 Calculadora clínica
-      </button>
+      {actions.map((action, index) => (
+        <button
+          key={index}
+          className="flex items-center p-3 bg-gray-50 hover:bg-gray-200 rounded-lg text-gray-700 
+          font-medium text-sm transition-colors border border-gray-200 cursor-pointer"
+        >
+          <span className="mr-2">{action.icon}</span>
+          <span className="text-sm text-left">{action.label}</span>
+        </button>
+      ))}
     </div>
   );
 
-  const renderDiagnosticoContent = () => (
-    <div className="text-center py-8">
-      <p className="text-gray-500 text-sm">Contenido para DIAGNÓSTICO CIE-10</p>
-      <p className="text-gray-400 text-xs mt-2">
-        Aquí se mostrarían las opciones de diagnóstico
-      </p>
-    </div>
-  );
+  const renderTodosContent = () => renderActionButtons(actionsAll);
 
-  const renderHallazgosContent = () => (
-    <div className="text-center py-8">
-      <p className="text-gray-500 text-sm">Contenido para HALLAZGOS CLÍNICOS</p>
-      <p className="text-gray-400 text-xs mt-2">
-        Aquí se mostrarían los hallazgos clínicos
-      </p>
-    </div>
-  );
+  const renderDiagnosticoContent = () =>
+    renderActionButtons(actionsIcd10Diagnosis);
+
+  const renderHallazgosContent = () =>
+    renderActionButtons(clinicalFindingsActions);
 
   switch (activeTab as HealthDataTab) {
     case "TODOS":
