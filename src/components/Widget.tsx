@@ -12,7 +12,7 @@ const Widget: React.FC<WidgetProps> = ({
     <div className="not-even:">
       {/* Header */}
       <div
-        className={` ml-2 mr-4 rounded-sm rounded-b-none px-4 py-3 flex items-center justify-between cursor-pointer ${color}`}
+        className={`ml-2 mr-5 rounded-sm rounded-b-none px-4 py-3 flex items-center justify-between cursor-pointer ${color}`}
         onClick={onToggle}
       >
         <div className="flex items-center space-x-2">

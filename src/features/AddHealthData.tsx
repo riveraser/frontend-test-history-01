@@ -9,7 +9,7 @@ const AddHealthData: React.FC = () => {
 
   const tabs: HealthDataTab[] = [
     "TODOS",
-    "DIAGNÓSTICO CIE-10",
+    "DIAGNOSIS CIE-10",
     "HALLAZGOS CLÍNICOS",
   ];
 

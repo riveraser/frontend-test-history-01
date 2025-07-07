@@ -33,10 +33,7 @@ export interface AccionItem {
 }
 
 // This will enforce the type of the tab
-export type HealthDataTab =
-  | "TODOS"
-  | "DIAGNÓSTICO CIE-10"
-  | "HALLAZGOS CLÍNICOS";
+export type HealthDataTab = "TODOS" | "DIAGNOSIS CIE-10" | "HALLAZGOS CLÍNICOS";
 
 export interface WidgetProps {
   title: string;
