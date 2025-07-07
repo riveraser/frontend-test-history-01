@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Widget from "../components/Widget";
-import EyeIcon from "../assets/svg/eye.svg?react";
-import type { ClinicalHistoryItem } from "../types";
+import Widget from "@components/Widget";
+import EyeButton from "@components/ui/EyeButton";
+import type { ClinicalHistoryItem } from "@/types";
 
 interface ClinicalHistoryProps {
   data: ClinicalHistoryItem[];
@@ -14,11 +14,16 @@ const ClinicalHistory: React.FC<ClinicalHistoryProps> = ({ data }) => {
     setIsExpanded(!isExpanded);
   };
 
+  const handleViewDetails = (item: ClinicalHistoryItem) => {
+    console.log("Ver detalles de:", item);
+    // Aquí puedes implementar la lógica para mostrar detalles
+  };
+
   if (data.length === 0) {
     return (
       <Widget
         title="Historial clínico"
-        color="bg-blue-900"
+        color="bg-green-600"
         icon="📋"
         isExpanded={isExpanded}
         onToggle={handleToggle}
@@ -33,7 +38,7 @@ const ClinicalHistory: React.FC<ClinicalHistoryProps> = ({ data }) => {
   return (
     <Widget
       title="Historial clínico"
-      color="bg-blue-900"
+      color="bg-green-600"
       icon="📋"
       isExpanded={isExpanded}
       onToggle={handleToggle}
@@ -52,9 +57,11 @@ const ClinicalHistory: React.FC<ClinicalHistoryProps> = ({ data }) => {
                 </span>
               </div>
             </div>
-            <button className="text-gray-400 hover:text-gray-600 transition-colors">
-              <EyeIcon />
-            </button>
+            <EyeButton
+              onClick={() => handleViewDetails(item)}
+              size="sm"
+              title={`Ver detalles de: ${item.description}`}
+            />
           </div>
         ))}
       </div>

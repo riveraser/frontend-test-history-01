@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Widget from "../components/Widget";
+import EyeButton from "../components/ui/EyeButton";
 import type { ParaclinicalItem } from "../types";
 
 interface ParaclinicalProps {
@@ -11,6 +12,11 @@ const Paraclinical: React.FC<ParaclinicalProps> = ({ data }) => {
 
   const handleToggle = () => {
     setIsExpanded(!isExpanded);
+  };
+
+  const handleViewDetails = (item: ParaclinicalItem) => {
+    console.log("Ver detalles de:", item);
+    // Aquí puedes implementar la lógica para mostrar detalles
   };
 
   if (data.length === 0) {
@@ -56,9 +62,11 @@ const Paraclinical: React.FC<ParaclinicalProps> = ({ data }) => {
               {item.hasAlert && (
                 <span className="text-red-500 font-bold">!!</span>
               )}
-              <button className="text-gray-400 hover:text-gray-600 transition-colors">
-                👁️
-              </button>
+              <EyeButton
+                onClick={() => handleViewDetails(item)}
+                size="sm"
+                title={`Ver detalles de: ${item.name}`}
+              />
             </div>
           </div>
         ))}
