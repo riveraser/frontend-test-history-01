@@ -26,21 +26,8 @@ export interface ParaclinicalItem {
   hasAlert?: boolean;
 }
 
-export interface WidgetProps {
-  title: string;
-  color: string;
-  icon: string;
-  children: React.ReactNode;
-  isExpanded?: boolean;
-  onToggle?: () => void;
-}
-
-export interface TabProps {
+export interface AccionItem {
   label: string;
-  isActive: boolean;
-  onClick: () => void;
-}
-
-export interface TabContentProps {
-  activeTab: string;
+  icon: string;
+  iconColor: string;
 }

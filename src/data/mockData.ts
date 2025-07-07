@@ -7,6 +7,7 @@ import type {
   TreatmentItem,
   PlanItem,
   ParaclinicalItem,
+  AccionItem,
 } from "../types";
 
 // Mock data for the "Historial clinico" section
@@ -86,4 +87,30 @@ export const paraclinicalData: ParaclinicalItem[] = [
     result: "180 mg/dL",
     hasAlert: false,
   },
+];
+
+// Mock data for "Agregar dato de salud" actions
+
+// Todas
+export const actionsAll: AccionItem[] = [
+  { label: "Signos vitales", icon: "❤️", iconColor: "text-red-500" },
+  { label: "Dato de laboratorio", icon: "🧪", iconColor: "text-purple-500" },
+  { label: "Talla y/o peso", icon: "👁️", iconColor: "text-green-500" },
+  { label: "Cirugía", icon: "✏️", iconColor: "text-blue-500" },
+  { label: "Escala / Clasificación", icon: "⚠️", iconColor: "text-orange-500" },
+  { label: "Calculadora clínica", icon: "🧮", iconColor: "text-gray-500" },
+];
+
+// Diagnóstico CIE-10
+export const actionsIcd10Diagnosis: AccionItem[] = [
+  { label: "Búsqueda CIE-10", icon: "👁️", iconColor: "text-blue-500" },
+  { label: "Diagnósticos frecuentes", icon: "❤️", iconColor: "text-green-500" },
+  { label: "Historial diagnósticos", icon: "⚠️", iconColor: "text-orange-500" },
+];
+
+// Hallazgos clínicos
+export const clinicalFindingsActions: AccionItem[] = [
+  { label: "Exploración física", icon: "👁️", iconColor: "text-blue-500" },
+  { label: "Signos vitales", icon: "❤️", iconColor: "text-red-500" },
+  { label: "Hallazgos relevantes", icon: "⚠️", iconColor: "text-yellow-500" },
 ];
