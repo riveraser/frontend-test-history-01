@@ -27,8 +27,9 @@ export interface ParaclinicalItem {
 }
 
 export interface AccionItem {
+  id: number;
   label: string;
-  icon: string;
+  icon: string; // This will be the icon name from our icons map
   iconColor: string;
 }
 

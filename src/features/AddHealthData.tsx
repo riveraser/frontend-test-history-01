@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Widget from "../components/Widget";
-import Tab from "../components/Tab";
-import TabContent from "../components/TabContent";
-import type { HealthDataTab } from "../types";
+import Widget from "@/components/Widget";
+import Tab from "@/components/Tab";
+import TabContent from "@/components/TabContent";
+import type { HealthDataTab } from "@/types";
 
 const AddHealthData: React.FC = () => {
   const [activeTab, setActiveTab] = useState<HealthDataTab>("TODOS");

@@ -1,5 +1,5 @@
 import React from "react";
-import EyeIcon from "@assets/icons/eye.svg?react";
+import { EyeIcon } from "@assets/icons";
 
 interface EyeButtonProps {
   onClick?: () => void;

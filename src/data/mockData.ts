@@ -8,7 +8,7 @@ import type {
   PlanItem,
   ParaclinicalItem,
   AccionItem,
-} from "../types";
+} from "@/types";
 
 // Mock data for the "Historial clinico" section
 export const clinicalHistoryData: ClinicalHistoryItem[] = [
@@ -46,7 +46,13 @@ export const currentTreatmentData: TreatmentItem[] = [
     id: "2",
     name: "Losartán",
     dose: "50mg",
-    posology: "1 tableta cada 12 horas",
+    posology: "1 tableta diaria",
+  },
+  {
+    id: "3",
+    name: "Atorvastatina",
+    dose: "20mg",
+    posology: "1 tableta diaria",
   },
 ];
 
@@ -66,50 +72,90 @@ export const planData: PlanItem[] = [
   },
 ];
 
-// Mock data for the "Paraclinicos" section
+// Mock data for the "Paraclínicos" section
 export const paraclinicalData: ParaclinicalItem[] = [
   {
     id: "1",
     name: "Hemograma completo",
-    result: "8.5 g/dL",
-    hasAlert: false,
+    result: "Normal",
   },
   {
     id: "2",
-    name: "Glucosa en ayunas",
-    result: "130 mg/dL",
+    name: "Glicemia en ayunas",
+    result: "Elevada - 145 mg/dL",
     hasAlert: true,
   },
   {
     id: "3",
-    name: "Colesterol Total",
-    result: "180 mg/dL",
-    hasAlert: false,
+    name: "Perfil lipídico",
+    result: "Normal",
   },
 ];
 
-// Mock data for "Agregar dato de salud" actions
-
-// Todas
+// Mock data for the "Agregar dato de salud" actions
 export const actionsAll: AccionItem[] = [
-  { label: "Signos vitales", icon: "❤️", iconColor: "text-red-500" },
-  { label: "Dato de laboratorio", icon: "🧪", iconColor: "text-purple-500" },
-  { label: "Talla y/o peso", icon: "👁️", iconColor: "text-green-500" },
-  { label: "Cirugía", icon: "✏️", iconColor: "text-blue-500" },
-  { label: "Escala / Clasificación", icon: "⚠️", iconColor: "text-orange-500" },
-  { label: "Calculadora clínica", icon: "🔢", iconColor: "text-gray-500" },
+  {
+    id: 1,
+    label: "Signos vitales",
+    icon: "heart",
+    iconColor: "text-[#ED1F20]",
+  },
+  {
+    id: 2,
+    label: "Talla y/o peso",
+    icon: "mkgCode",
+    iconColor: "text-[#48A600]",
+  },
+  {
+    id: 3,
+    label: "Dato de laboratorio",
+    icon: "testTube",
+    iconColor: "text-[#AD3AFF]",
+  },
+
+  { id: 4, label: "Cirugía", icon: "scalpel", iconColor: "text-[#348DFF]" },
+  {
+    id: 5,
+    label: "Escala / Clasificación",
+    icon: "network",
+    iconColor: "text-[#F07905]",
+  },
+  {
+    id: 6,
+    label: "Calculadora clínica",
+    icon: "calculator",
+    iconColor: "text-[#6C6C6C]",
+  },
 ];
 
-// Diagnóstico CIE-10
 export const actionsIcd10Diagnosis: AccionItem[] = [
-  { label: "Búsqueda CIE-10", icon: "👁️", iconColor: "text-blue-500" },
-  { label: "Diagnósticos frecuentes", icon: "❤️", iconColor: "text-green-500" },
-  { label: "Historial diagnósticos", icon: "⚠️", iconColor: "text-orange-500" },
+  {
+    id: 7,
+    label: "CIE-10 Diagnóstico",
+    icon: "rxCode",
+    iconColor: "text-blue-600",
+  },
+  {
+    id: 8,
+    label: "CIE-10 Procedimiento",
+    icon: "cxCode",
+    iconColor: "text-green-600",
+  },
+  {
+    id: 9,
+    label: "CIE-10 MKG",
+    icon: "mkgCode",
+    iconColor: "text-purple-600",
+  },
 ];
 
-// Hallazgos clínicos
 export const clinicalFindingsActions: AccionItem[] = [
-  { label: "Exploración física", icon: "👁️", iconColor: "text-blue-500" },
-  { label: "Signos vitales", icon: "❤️", iconColor: "text-red-500" },
-  { label: "Hallazgos relevantes", icon: "⚠️", iconColor: "text-yellow-500" },
+  {
+    id: 10,
+    label: "Hallazgos físicos",
+    icon: "expandView",
+    iconColor: "text-blue-500",
+  },
+  { id: 11, label: "Síntomas", icon: "heart", iconColor: "text-red-500" },
+  { id: 12, label: "Signos", icon: "testTube", iconColor: "text-orange-500" },
 ];
