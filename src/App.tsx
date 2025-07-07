@@ -34,20 +34,14 @@ function App() {
             <div className="flex-1">
               <AddHealthData />
             </div>
-
-            {/* Widget 2: Historial clínico */}
-            <div className="flex-1">
-              <ClinicalHistory data={clinicalHistoryData} />
-            </div>
           </div>
 
           {/* Second Row */}
           <div className="flex flex-col lg:flex-row gap-6">
-            {/* Widget 3: Tratamiento actual */}
+            {/* Widget 2: Historial clínico */}
             <div className="flex-1">
-              <CurrentTreatment data={currentTreatmentData} />
+              <ClinicalHistory data={clinicalHistoryData} />
             </div>
-
             {/* Widget 4: Plan */}
             <div className="flex-1">
               <Plan data={planData} />
@@ -55,9 +49,15 @@ function App() {
           </div>
 
           {/* Third Row - Full Width */}
-          <div>
+          <div className="flex flex-col lg:flex-row gap-6">
+            {/* Widget 3: Tratamiento actual */}
+            <div className="flex-1">
+              <CurrentTreatment data={currentTreatmentData} />
+            </div>
             {/* Widget 5: Paraclínicos */}
-            <Paraclinical data={paraclinicalData} />
+            <div className="flex-1">
+              <Paraclinical data={paraclinicalData} />
+            </div>
           </div>
         </div>
       </div>

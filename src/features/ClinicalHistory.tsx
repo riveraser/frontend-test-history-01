@@ -16,14 +16,14 @@ const ClinicalHistory: React.FC<ClinicalHistoryProps> = ({ data }) => {
 
   const handleViewDetails = (item: ClinicalHistoryItem) => {
     console.log("Ver detalles de:", item);
-    // Aquí puedes implementar la lógica para mostrar detalles
+    // TODO: Implement the logic to view the details
   };
 
   if (data.length === 0) {
     return (
       <Widget
         title="Historial clínico"
-        color="bg-green-600"
+        color="bg-blue-900"
         icon="📋"
         isExpanded={isExpanded}
         onToggle={handleToggle}
@@ -38,7 +38,7 @@ const ClinicalHistory: React.FC<ClinicalHistoryProps> = ({ data }) => {
   return (
     <Widget
       title="Historial clínico"
-      color="bg-green-600"
+      color="bg-blue-900"
       icon="📋"
       isExpanded={isExpanded}
       onToggle={handleToggle}
@@ -57,11 +57,13 @@ const ClinicalHistory: React.FC<ClinicalHistoryProps> = ({ data }) => {
                 </span>
               </div>
             </div>
-            <EyeButton
-              onClick={() => handleViewDetails(item)}
-              size="sm"
-              title={`Ver detalles de: ${item.description}`}
-            />
+            {item.details && (
+              <EyeButton
+                onClick={() => handleViewDetails(item)}
+                size="md"
+                title={`Ver detalles de: ${item.description}`}
+              />
+            )}
           </div>
         ))}
       </div>
