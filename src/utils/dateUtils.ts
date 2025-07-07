@@ -24,8 +24,14 @@ const monthNames: Record<string, string> = {
  * @returns Object with month (abbreviated in Spanish) and year
  */
 export const formatDate = (dateString: string) => {
-  const [, month, year] = dateString.split("/");
+  const parts = dateString.split("/");
 
+  // This check was added to avoid errors when the date is not in the format DD/MM/YYYY
+  // thanks to unit test I found this bug
+  if (parts.length < 3) {
+    return { month: undefined, year: undefined };
+  }
+  const [, month, year] = parts;
   return {
     month: monthNames[month] || month,
     year: year,
