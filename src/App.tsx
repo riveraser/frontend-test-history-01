@@ -1,66 +1,180 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import Card from "./components/Card";
+// TODO: Replace div templates with reusable components
+import React, { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [activeTab, setActiveTab] = useState("TODOS");
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-8">
-      <div className="flex gap-8 mb-8">
-        <a
-          href="https://vite.dev"
-          target="_blank"
-          className="hover:scale-110 transition-transform"
-        >
-          <img src={viteLogo} className="h-24 w-24" alt="Vite logo" />
-        </a>
-        <a
-          href="https://react.dev"
-          target="_blank"
-          className="hover:scale-110 transition-transform"
-        >
-          <img
-            src={reactLogo}
-            className="h-24 w-24 animate-spin"
-            alt="React logo"
-          />
-        </a>
-      </div>
-      <h1 className="text-4xl font-bold text-gray-800 mb-8">
-        Vite + React + TailwindCSS
-      </h1>
+    <div className="min-h-screen bg-gray-50 p-6">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+            Dashboard Clínico
+          </h1>
+          <p className="text-gray-600">
+            Información del paciente y resumen clínico
+          </p>
+        </div>
 
-      <Card className="bg-blue-50 border-blue-300">
-        <h2 className="text-xl font-semibold text-blue-800 mb-2">
-          TailwindCSS Card Example
-        </h2>
-        <p className="text-blue-600">
-          This card uses the `card m-5 p-4` classes from TailwindCSS to test the
-          installation!
-        </p>
-      </Card>
+        {/* Widgets Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Widget 1: Agregar dato de salud */}
+          <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+            <div className="bg-blue-600 px-4 py-3 flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <span className="text-white font-medium">➕</span>
+                <h3 className="text-white font-semibold text-sm">
+                  Agregar dato de salud
+                </h3>
+              </div>
+            </div>
+            <div className="p-4">
+              {/* Tab Navigation */}
+              <div className="flex space-x-1 mb-4">
+                <button
+                  onClick={() => setActiveTab("TODOS")}
+                  className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-colors ${
+                    activeTab === "TODOS"
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  }`}
+                >
+                  TODOS
+                </button>
+                <button
+                  onClick={() => setActiveTab("DIAGNÓSTICO CIE-10")}
+                  className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-colors ${
+                    activeTab === "DIAGNÓSTICO CIE-10"
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  }`}
+                >
+                  DIAGNÓSTICO CIE-10
+                </button>
+                <button
+                  onClick={() => setActiveTab("HALLAZGOS CLÍNICOS")}
+                  className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-colors ${
+                    activeTab === "HALLAZGOS CLÍNICOS"
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  }`}
+                >
+                  HALLAZGOS CLÍNICOS
+                </button>
+              </div>
 
-      <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full">
-        <button
-          onClick={() => setCount((count) => count + 1)}
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors mb-4
-          cursor-pointer"
-        >
-          count is {count}
-        </button>
-        <p className="text-gray-600 text-center">
-          Edit{" "}
-          <code className="bg-gray-200 px-2 py-1 rounded text-sm">
-            src/App.tsx
-          </code>{" "}
-          and save to test HMR
-        </p>
+              {/* Tab Content */}
+              {activeTab === "TODOS" && (
+                <div className="grid grid-cols-2 gap-3">
+                  <button className="p-3 bg-blue-50 hover:bg-blue-100 rounded-lg text-blue-700 font-medium text-sm transition-colors">
+                    ❤️ Signos vitales
+                  </button>
+                  <button className="p-3 bg-green-50 hover:bg-green-100 rounded-lg text-green-700 font-medium text-sm transition-colors">
+                    🧪 Dato de laboratorio
+                  </button>
+                  <button className="p-3 bg-purple-50 hover:bg-purple-100 rounded-lg text-purple-700 font-medium text-sm transition-colors">
+                    👁️ Talla y/o peso
+                  </button>
+                  <button className="p-3 bg-orange-50 hover:bg-orange-100 rounded-lg text-orange-700 font-medium text-sm transition-colors">
+                    ✏️ Cirugía
+                  </button>
+                  <button className="p-3 bg-red-50 hover:bg-red-100 rounded-lg text-red-700 font-medium text-sm transition-colors">
+                    ⚠️ Escala / Clasificación
+                  </button>
+                  <button className="p-3 bg-indigo-50 hover:bg-indigo-100 rounded-lg text-indigo-700 font-medium text-sm transition-colors">
+                    🧮 Calculadora clínica
+                  </button>
+                </div>
+              )}
+
+              {activeTab === "DIAGNÓSTICO CIE-10" && (
+                <div className="text-center py-8">
+                  <p className="text-gray-500 text-sm">
+                    Contenido para DIAGNÓSTICO CIE-10
+                  </p>
+                  <p className="text-gray-400 text-xs mt-2">
+                    Aquí se mostrarían las opciones de diagnóstico
+                  </p>
+                </div>
+              )}
+
+              {activeTab === "HALLAZGOS CLÍNICOS" && (
+                <div className="text-center py-8">
+                  <p className="text-gray-500 text-sm">
+                    Contenido para HALLAZGOS CLÍNICOS
+                  </p>
+                  <p className="text-gray-400 text-xs mt-2">
+                    Aquí se mostrarían los hallazgos clínicos
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Widget 2: Historial clínico */}
+          <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+            <div className="bg-green-600 px-4 py-3 flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <span className="text-white font-medium">📋</span>
+                <h3 className="text-white font-semibold text-sm">
+                  Historial clínico
+                </h3>
+              </div>
+            </div>
+            <div className="p-4">
+              <p className="text-gray-500 text-sm">
+                Contenido del historial clínico
+              </p>
+            </div>
+          </div>
+
+          {/* Widget 3: Tratamiento actual */}
+          <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+            <div className="bg-purple-600 px-4 py-3 flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <span className="text-white font-medium">💊</span>
+                <h3 className="text-white font-semibold text-sm">
+                  Tratamiento actual
+                </h3>
+              </div>
+            </div>
+            <div className="p-4">
+              <p className="text-gray-500 text-sm">
+                Contenido del tratamiento actual
+              </p>
+            </div>
+          </div>
+
+          {/* Widget 4: Plan */}
+          <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+            <div className="bg-orange-600 px-4 py-3 flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <span className="text-white font-medium">📋</span>
+                <h3 className="text-white font-semibold text-sm">Plan</h3>
+              </div>
+            </div>
+            <div className="p-4">
+              <p className="text-gray-500 text-sm">Contenido del plan</p>
+            </div>
+          </div>
+
+          {/* Widget 5: Paraclínicos */}
+          <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden lg:col-span-2">
+            <div className="bg-red-600 px-4 py-3 flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <span className="text-white font-medium">🔬</span>
+                <h3 className="text-white font-semibold text-sm">
+                  Paraclínicos
+                </h3>
+              </div>
+            </div>
+            <div className="p-4">
+              <p className="text-gray-500 text-sm">Contenido de paraclínicos</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <p className="text-gray-500 mt-8 text-center">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
   );
 }
