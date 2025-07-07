@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Widget from "@/components/Widget";
 import type { PlanItem } from "@/types";
-
+import EyeButton from "@components/ui/EyeButton";
+import DynamicIcon from "@/components/ui/DynamicIcon";
+import { IconName } from "@/assets/icons";
 interface PlanProps {
   data: PlanItem[];
 }
@@ -13,12 +15,16 @@ const Plan: React.FC<PlanProps> = ({ data }) => {
     setIsExpanded(!isExpanded);
   };
 
+  const handleViewDetails = (item: PlanItem) => {
+    console.log("Ver detalles de:", item);
+    // TODO: Implement the logic to view the details
+  };
+
   if (data.length === 0) {
     return (
       <Widget
         title="Plan"
-        color="bg-blue-800"
-        icon="📋"
+        color="bg-(--plan-header-bg) text-(--plan-header-text)"
         isExpanded={isExpanded}
         onToggle={handleToggle}
       >
@@ -32,29 +38,41 @@ const Plan: React.FC<PlanProps> = ({ data }) => {
   return (
     <Widget
       title="Plan"
-      color="bg-blue-800"
-      icon="📋"
+      color="bg-(--plan-header-bg) text-(--plan-header-text)"
       isExpanded={isExpanded}
       onToggle={handleToggle}
       isExpandable={true}
+      collapseColor="text-(--plan-header-bg)"
     >
       <div className="space-y-3">
         {data.map((item) => (
           <div
             key={item.id}
-            className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+            className="widget-item-glow flex items-stretch p-2 bg-gray-50 rounded-sm "
           >
-            <div className="flex items-center space-x-3">
-              <span className="text-blue-800 font-medium">Rx</span>
-              <div className="flex-1">
-                <div className="font-medium text-gray-800 text-sm">
-                  {item.name}
-                </div>
-                <div className="text-gray-600 text-xs">
-                  {item.dose} - {item.posology}
-                </div>
+            <div className="flex items-center justify-center">
+              <DynamicIcon
+                name={item.icon as IconName}
+                size="lg"
+                className={`${item.iconColor} w-10 h-10`}
+              />
+            </div>
+            <div className="flex items-center justify-center flex-1 px-4">
+              <div className="text-(--widget-text) text-md font-bold text-left">
+                {`${item.name}  ${item.dose}`} <br />
+                {item.posology}
               </div>
             </div>
+            {item.details && (
+              <div className="flex items-center justify-center">
+                <EyeButton
+                  onClick={() => handleViewDetails(item)}
+                  size="lg"
+                  title={`Ver detalles de: ${item.name}  ${item.dose}`}
+                  className="!h-full"
+                />
+              </div>
+            )}
           </div>
         ))}
       </div>

@@ -17,6 +17,9 @@ export interface PlanItem {
   name: string;
   dose: string;
   posology: string;
+  details?: string;
+  icon?: string;
+  iconColor?: string;
 }
 
 export interface ParaclinicalItem {

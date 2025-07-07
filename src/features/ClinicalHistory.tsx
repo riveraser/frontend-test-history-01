@@ -50,7 +50,7 @@ const ClinicalHistory: React.FC<ClinicalHistoryProps> = ({ data }) => {
         {data.map((item) => (
           <div
             key={item.id}
-            className="widget-item-glow flex items-stretch p-2 bg-gray-50 rounded-sm min-h-[80px]"
+            className="widget-item-glow flex items-stretch p-2 bg-gray-50 rounded-sm"
           >
             <div className="flex items-center justify-center">
               <DateDisplay date={item.date} />
@@ -64,7 +64,7 @@ const ClinicalHistory: React.FC<ClinicalHistoryProps> = ({ data }) => {
               <div className="flex items-center justify-center">
                 <EyeButton
                   onClick={() => handleViewDetails(item)}
-                  size="md"
+                  size="lg"
                   title={`Ver detalles de: ${item.description}`}
                   className="!h-full"
                 />

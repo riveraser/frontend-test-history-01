@@ -60,15 +60,21 @@ export const currentTreatmentData: TreatmentItem[] = [
 export const planData: PlanItem[] = [
   {
     id: "1",
-    name: "Aspirina",
-    dose: "100mg",
-    posology: "1 tableta diaria",
+    name: "Ciprofloxacino",
+    dose: "100mg VO",
+    posology: "Cada 12 horas x 7 días",
+    details: "Se recomienda tomar 1 tableta cada 12 horas durante 7 días.",
+    icon: "rxCode",
+    iconColor: "text-[#144CB9]",
   },
   {
     id: "2",
-    name: "Vitamina D",
-    dose: "1000 UI",
-    posology: "1 cápsula diaria",
+    name: "Acetaminofén",
+    dose: "500mg VO",
+    posology: "Cada 8 horas x 5 días",
+    details: "Se recomienda tomar 1 tableta cada 8 horas durante 5 días.",
+    icon: "rxCode",
+    iconColor: "text-[#144CB9]",
   },
 ];
 
