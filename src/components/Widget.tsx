@@ -27,8 +27,14 @@ const Widget: React.FC<WidgetProps> = ({
         )}
       </div>
 
-      {/* Content */}
-      {isExpanded && <div className="p-4">{children}</div>}
+      {/* Adding smooth transition to the content when the widget is expanded or collapsed */}
+      <div
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+          isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="p-4">{children}</div>
+      </div>
     </div>
   );
 };

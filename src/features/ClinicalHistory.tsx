@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Widget from "../components/Widget";
 import type { ClinicalHistoryItem } from "../types";
 
@@ -7,9 +7,21 @@ interface ClinicalHistoryProps {
 }
 
 const ClinicalHistory: React.FC<ClinicalHistoryProps> = ({ data }) => {
+  const [isExpanded, setIsExpanded] = useState(true);
+
+  const handleToggle = () => {
+    setIsExpanded(!isExpanded);
+  };
+
   if (data.length === 0) {
     return (
-      <Widget title="Historial clínico" color="bg-green-600" icon="📋">
+      <Widget
+        title="Historial clínico"
+        color="bg-green-600"
+        icon="📋"
+        isExpanded={isExpanded}
+        onToggle={handleToggle}
+      >
         <div className="text-center py-4">
           <p className="text-gray-500 text-sm">No hay datos para mostrar</p>
         </div>
@@ -18,7 +30,13 @@ const ClinicalHistory: React.FC<ClinicalHistoryProps> = ({ data }) => {
   }
 
   return (
-    <Widget title="Historial clínico" color="bg-blue-600" icon="📋">
+    <Widget
+      title="Historial clínico"
+      color="bg-green-600"
+      icon="📋"
+      isExpanded={isExpanded}
+      onToggle={handleToggle}
+    >
       <div className="space-y-3">
         {data.map((item) => (
           <div

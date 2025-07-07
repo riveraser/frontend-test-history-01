@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Widget from "../components/Widget";
 import type { PlanItem } from "../types";
 
@@ -7,9 +7,21 @@ interface PlanProps {
 }
 
 const Plan: React.FC<PlanProps> = ({ data }) => {
+  const [isExpanded, setIsExpanded] = useState(true);
+
+  const handleToggle = () => {
+    setIsExpanded(!isExpanded);
+  };
+
   if (data.length === 0) {
     return (
-      <Widget title="Plan" color="bg-blue-800" icon="📋">
+      <Widget
+        title="Plan"
+        color="bg-blue-800"
+        icon="📋"
+        isExpanded={isExpanded}
+        onToggle={handleToggle}
+      >
         <div className="text-center py-4">
           <p className="text-gray-500 text-sm">No hay datos para mostrar</p>
         </div>
@@ -18,7 +30,13 @@ const Plan: React.FC<PlanProps> = ({ data }) => {
   }
 
   return (
-    <Widget title="Plan" color="bg-blue-800" icon="📋">
+    <Widget
+      title="Plan"
+      color="bg-blue-800"
+      icon="📋"
+      isExpanded={isExpanded}
+      onToggle={handleToggle}
+    >
       <div className="space-y-3">
         {data.map((item) => (
           <div
