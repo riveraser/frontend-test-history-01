@@ -5,9 +5,13 @@ import type { ClinicalHistoryItem } from "@/types";
 
 interface ClinicalHistoryProps {
   data: ClinicalHistoryItem[];
+  onViewDetails?: (item: ClinicalHistoryItem) => void;
 }
 
-const ClinicalHistory: React.FC<ClinicalHistoryProps> = ({ data }) => {
+const ClinicalHistory: React.FC<ClinicalHistoryProps> = ({
+  data,
+  onViewDetails,
+}) => {
   const [isExpanded, setIsExpanded] = useState(true);
 
   const handleToggle = () => {
@@ -16,7 +20,7 @@ const ClinicalHistory: React.FC<ClinicalHistoryProps> = ({ data }) => {
 
   const handleViewDetails = (item: ClinicalHistoryItem) => {
     console.log("Ver detalles de:", item);
-    // TODO: Implement the logic to view the details
+    onViewDetails?.(item);
   };
 
   if (data.length === 0) {
