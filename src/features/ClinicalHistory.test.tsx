@@ -45,8 +45,8 @@ describe("ClinicalHistory", () => {
         expect(screen.getByText(item.description)).toBeInTheDocument();
         // The date is formatted by DateDisplay component, so we check for the formatted parts
         const { month, year } = formatDate(item.date);
-        expect(screen.getByText(month)).toBeInTheDocument();
-        expect(screen.getByText(year)).toBeInTheDocument();
+        expect(screen.getByText(month || "")).toBeInTheDocument();
+        expect(screen.getByText(year || "")).toBeInTheDocument();
       });
     });
 
@@ -87,8 +87,8 @@ describe("ClinicalHistory", () => {
       expect(screen.getByText(firstItem.description)).toBeInTheDocument();
       // Check formatted date parts
       const { month, year } = formatDate(firstItem.date);
-      expect(screen.getByText(month)).toBeInTheDocument();
-      expect(screen.getByText(year)).toBeInTheDocument();
+      expect(screen.getByText(month || "")).toBeInTheDocument();
+      expect(screen.getByText(year || "")).toBeInTheDocument();
     });
   });
 });
