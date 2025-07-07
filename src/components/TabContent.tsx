@@ -14,11 +14,14 @@ const TabContent: React.FC<TabContentProps> = ({ activeTab }) => {
       {actions.map((action, index) => (
         <button
           key={index}
-          className="flex items-center p-3 bg-gray-50 hover:bg-gray-200 rounded-lg text-gray-700 
-          font-medium text-sm transition-colors border border-gray-200 cursor-pointer"
+          className="relative bg-(--health-button-bg) text-(--health-button-text) p-4 rounded-lg font-medium text-sm transition-colors hover:bg-gray-100"
         >
-          <span className="mr-2">{action.icon}</span>
-          <span className="text-sm text-left">{action.label}</span>
+          <div className="flex items-center justify-between">
+            <span className="text-center flex-1">{action.label}</span>
+            <div className="bg-(--health-icon-bg) rounded-full p-2 ml-3">
+              <span className="text-lg">{action.icon}</span>
+            </div>
+          </div>
         </button>
       ))}
     </div>

@@ -4,24 +4,22 @@ import type { WidgetProps } from "../types";
 const Widget: React.FC<WidgetProps> = ({
   title,
   color,
-  icon,
   children,
   isExpanded = true,
   onToggle,
 }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+    <div className="not-even:">
       {/* Header */}
       <div
-        className={`px-4 py-3 flex items-center justify-between cursor-pointer ${color}`}
+        className={` ml-2 mr-4 rounded-sm rounded-b-none px-4 py-3 flex items-center justify-between cursor-pointer ${color}`}
         onClick={onToggle}
       >
         <div className="flex items-center space-x-2">
-          <span className="text-white font-medium">{icon}</span>
-          <h3 className="text-white font-semibold text-sm">{title}</h3>
+          <h3 className="font-semibold text-xl">{title}</h3>
         </div>
         {onToggle && (
-          <button className="text-white hover:text-gray-200 transition-colors">
+          <button className=" hover:text-gray-200 transition-colors">
             {isExpanded ? "−" : "+"}
           </button>
         )}
@@ -29,7 +27,7 @@ const Widget: React.FC<WidgetProps> = ({
 
       {/* Adding smooth transition to the content when the widget is expanded or collapsed */}
       <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+        className={` widget-glow bg-white rounded-sm border border-gray-100 overflow-hidden transition-all duration-300 ease-in-out ${
           isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >

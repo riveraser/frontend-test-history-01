@@ -5,10 +5,10 @@ const Tab: React.FC<TabProps> = ({ label, isActive, onClick }) => {
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-colors duration-300 ${
+      className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
         isActive
-          ? "bg-blue-600 text-white"
-          : "bg-gray-100 text-gray-600 hover:bg-gray-200 cursor-pointer"
+          ? "bg-(--health-tab-active-bg) text-(--health-tab-active-text)"
+          : "bg-(--health-tab-inactive-bg) text-(--health-tab-inactive-text) hover:text-(--health-tab-active-text) cursor-pointer"
       }`}
     >
       {label}

@@ -41,10 +41,11 @@ export type HealthDataTab =
 export interface WidgetProps {
   title: string;
   color: string;
-  icon: string;
+  icon?: string;
   children: React.ReactNode;
   isExpanded?: boolean;
   onToggle?: () => void;
+  style?: React.CSSProperties;
 }
 
 export interface TabProps {

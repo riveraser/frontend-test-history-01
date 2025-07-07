@@ -15,48 +15,35 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        {/* TODO: Replace this with a reusable component? */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            Dashboard Clínico
-          </h1>
-          <p className="text-gray-600">
-            Información del paciente y resumen clínico
-          </p>
-        </div>
-
         {/* Widgets Layout */}
-        <div className="space-y-6">
-          {/* First Row */}
-          <div className="flex flex-col lg:flex-row gap-6">
-            {/* Widget 1: Agregar dato de salud */}
-            <div className="flex-1">
-              <AddHealthData />
-            </div>
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* Primera columna: Solo Agregar dato de salud */}
+          <div className="w-full lg:w-1/3">
+            <AddHealthData />
           </div>
 
-          {/* Second Row */}
-          <div className="flex flex-col lg:flex-row gap-6">
-            {/* Widget 2: Historial clínico */}
-            <div className="flex-1">
-              <ClinicalHistory data={clinicalHistoryData} />
-            </div>
-            {/* Widget 4: Plan */}
-            <div className="flex-1">
-              <Plan data={planData} />
-            </div>
-          </div>
+          {/* Segunda columna: Los otros 4 widgets en 2x2 */}
+          <div className="w-full lg:w-2/3">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Widget 2: Historial clínico */}
+              <div>
+                <ClinicalHistory data={clinicalHistoryData} />
+              </div>
 
-          {/* Third Row - Full Width */}
-          <div className="flex flex-col lg:flex-row gap-6">
-            {/* Widget 3: Tratamiento actual */}
-            <div className="flex-1">
-              <CurrentTreatment data={currentTreatmentData} />
-            </div>
-            {/* Widget 5: Paraclínicos */}
-            <div className="flex-1">
-              <Paraclinical data={paraclinicalData} />
+              {/* Widget 3: Plan */}
+
+              <div>
+                <Plan data={planData} />
+              </div>
+              {/* Widget 4:  Tratamiento actual*/}
+              <div>
+                <CurrentTreatment data={currentTreatmentData} />
+              </div>
+
+              {/* Widget 5: Paraclínicos */}
+              <div>
+                <Paraclinical data={paraclinicalData} />
+              </div>
             </div>
           </div>
         </div>

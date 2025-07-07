@@ -14,17 +14,22 @@ const AddHealthData: React.FC = () => {
   ];
 
   return (
-    <Widget title="Agregar dato de salud" color="bg-blue-600" icon="➕">
+    <Widget
+      title="Agregar dato de salud"
+      color="bg-(--health-header-bg) text-(--health-header-text)"
+    >
       {/* Tab Navigation */}
-      <div className="flex space-x-1 mb-4">
-        {tabs.map((tab) => (
-          <Tab
-            key={tab}
-            label={tab}
-            isActive={activeTab === tab}
-            onClick={() => setActiveTab(tab)}
-          />
-        ))}
+      <div className="bg-(--health-tabs-bg) p-1 rounded-lg mb-4">
+        <div className="flex space-x-1">
+          {tabs.map((tab) => (
+            <Tab
+              key={tab}
+              label={tab}
+              isActive={activeTab === tab}
+              onClick={() => setActiveTab(tab)}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Tab Content */}
