@@ -1,0 +1,18 @@
+[
+  {
+    "id": "1",
+    "name": "Ciprofloxacino",
+    "dose": "500mg VO",
+    "posology": "Cada 12 horas x 7 días",
+    "icon": "cxCode",
+    "iconColor": "text-[#B31B00]"
+  },
+  {
+    "id": "2",
+    "name": "Acetaminofén",
+    "dose": "500mg VO",
+    "posology": "Cada 8 horas x 5 días",
+    "icon": "rxCode",
+    "iconColor": "text-[#144CB9]"
+  }
+] 

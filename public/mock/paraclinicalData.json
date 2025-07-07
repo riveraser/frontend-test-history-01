@@ -1,0 +1,11 @@
+[
+  {
+    "id": "1",
+    "name": "Glucemia en ayuno",
+    "result": "101 mg/dl",
+    "icon": "testTube",
+    "iconColor": "text-[#A63AFF]",
+    "hasAlert": true,
+    "details": "Se recomienda realizar un seguimiento de la glucemia en ayuno."
+  }
+]

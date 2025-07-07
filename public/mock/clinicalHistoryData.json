@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "date": "15/03/2014",
+    "description": "Hipertension arterial primaria",
+    "details": "Se mantiene tratamiento actual con seguimiento mensual."
+  },
+  {
+    "id": "2",
+    "date": "10/12/2021",
+    "description": "Obstruccion intestinal",
+    "details": "Se realizó endoscopia de colon y se encontró obstrucción intestinal. Se recomienda tratamiento con medicamentos y seguimiento."
+  },
+  {
+    "id": "3",
+    "date": "22/01/2024",
+    "description": "Trauma en el tobillo izquierdo",
+    "details": "Se realizó radiografía de tobillo y se encontró fractura de tobillo. Se recomienda tratamiento con medicamentos y seguimiento."
+  }
+]

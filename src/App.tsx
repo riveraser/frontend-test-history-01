@@ -1,17 +1,21 @@
-import React from "react";
-import ClinicalHistory from "./features/ClinicalHistory";
-import CurrentTreatment from "./features/CurrentTreatment";
-import Plan from "./features/Plan";
-import Paraclinical from "./features/Paraclinical";
-import AddHealthData from "./features/AddHealthData";
-import {
-  clinicalHistoryData,
-  currentTreatmentData,
-  planData,
-  paraclinicalData,
-} from "./data/mockData";
+import ClinicalHistory from "@features/ClinicalHistory";
+import CurrentTreatment from "@features/CurrentTreatment";
+import Plan from "@features/Plan";
+import Paraclinical from "@features/Paraclinical";
+import AddHealthData from "@features/AddHealthData";
+import { LoadingSpinner } from "@components/LoadingSpinner";
+import { ErrorMessage } from "@components/ErrorMessage";
+import { useClinicalHistory } from "@hooks/useClinicalHistory";
+import { useCurrentTreatment } from "@hooks/useCurrentTreatment";
+import { usePlan } from "@hooks/usePlan";
+import { useParaclinical } from "@hooks/useParaclinical";
 
 function App() {
+  const clinicalHistory = useClinicalHistory();
+  const currentTreatment = useCurrentTreatment();
+  const plan = usePlan();
+  const paraclinical = useParaclinical();
+
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-6xl mx-auto">
@@ -27,22 +31,46 @@ function App() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Widget 2: Historial clínico */}
               <div>
-                <ClinicalHistory data={clinicalHistoryData} />
+                {clinicalHistory.isLoading ? (
+                  <LoadingSpinner className="py-8" />
+                ) : clinicalHistory.error ? (
+                  <ErrorMessage message="Error al cargar el historial clínico" />
+                ) : (
+                  <ClinicalHistory data={clinicalHistory.data || []} />
+                )}
               </div>
 
               {/* Widget 3: Plan */}
-
               <div>
-                <Plan data={planData} />
+                {plan.isLoading ? (
+                  <LoadingSpinner className="py-8" />
+                ) : plan.error ? (
+                  <ErrorMessage message="Error al cargar el plan" />
+                ) : (
+                  <Plan data={plan.data || []} />
+                )}
               </div>
-              {/* Widget 4:  Tratamiento actual*/}
+
+              {/* Widget 4: Tratamiento actual */}
               <div>
-                <CurrentTreatment data={currentTreatmentData} />
+                {currentTreatment.isLoading ? (
+                  <LoadingSpinner className="py-8" />
+                ) : currentTreatment.error ? (
+                  <ErrorMessage message="Error al cargar el tratamiento actual" />
+                ) : (
+                  <CurrentTreatment data={currentTreatment.data || []} />
+                )}
               </div>
 
               {/* Widget 5: Paraclínicos */}
               <div>
-                <Paraclinical data={paraclinicalData} />
+                {paraclinical.isLoading ? (
+                  <LoadingSpinner className="py-8" />
+                ) : paraclinical.error ? (
+                  <ErrorMessage message="Error al cargar los paraclínicos" />
+                ) : (
+                  <Paraclinical data={paraclinical.data || []} />
+                )}
               </div>
             </div>
           </div>

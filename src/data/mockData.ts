@@ -2,6 +2,18 @@
 // because of standardization.
 // Even my comments will be in English for the same reason.
 
+// I am simulating the use of the API to get the data
+// thats why I am using the mock data from the public folder:
+
+// public/mock/clinicalHistoryData.json
+// public/mock/currentTreatmentData.json
+// public/mock/paraclinicalData.json
+// public/mock/planData.json
+
+// They have the same structure as in these mock data
+
+// Since this is a demo project I am not unsing somenthing like Axios
+
 import type {
   ClinicalHistoryItem,
   TreatmentItem,
