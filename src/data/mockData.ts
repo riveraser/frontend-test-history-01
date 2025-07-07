@@ -30,8 +30,7 @@ export const clinicalHistoryData: ClinicalHistoryItem[] = [
     id: "3",
     date: "05/03/2024",
     description: "Revisión de diabetes tipo 2",
-    details:
-      "Glicemia en ayunas estable. Se reitera importancia del control dietético y actividad física.",
+    // Without details to test the eye button
   },
 ];
 

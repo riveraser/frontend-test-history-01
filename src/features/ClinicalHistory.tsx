@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Widget from "../components/Widget";
+import EyeIcon from "../assets/svg/eye.svg?react";
 import type { ClinicalHistoryItem } from "../types";
 
 interface ClinicalHistoryProps {
@@ -52,7 +53,7 @@ const ClinicalHistory: React.FC<ClinicalHistoryProps> = ({ data }) => {
               </div>
             </div>
             <button className="text-gray-400 hover:text-gray-600 transition-colors">
-              👁️
+              <EyeIcon />
             </button>
           </div>
         ))}

@@ -2,7 +2,7 @@ export interface ClinicalHistoryItem {
   id: string;
   date: string;
   description: string;
-  details: string;
+  details?: string;
 }
 
 export interface TreatmentItem {
