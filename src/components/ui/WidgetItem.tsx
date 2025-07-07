@@ -14,6 +14,7 @@ interface WidgetItemProps {
   onViewDetails?: () => void;
   className?: string;
   subtitleClassName?: string;
+  hasAlert?: boolean;
 }
 
 const WidgetItem: React.FC<WidgetItemProps> = ({
@@ -26,6 +27,7 @@ const WidgetItem: React.FC<WidgetItemProps> = ({
   onViewDetails,
   className = "",
   subtitleClassName = "",
+  hasAlert = false,
 }) => {
   const hasDetails = details && onViewDetails;
 
@@ -54,7 +56,16 @@ const WidgetItem: React.FC<WidgetItemProps> = ({
         </div>
       </div>
 
-      {/* Tercera columna: EyeButton (solo si hay details) */}
+      {/* Tercera columna: Alert */}
+      {hasAlert && (
+        <div className="flex items-center justify-center flex-shrink-0">
+          <span className="text-(--widget-alert-text) bg-(--widget-alert-bg) font-bold !h-full w-9 rounded-sm p-2 text-center">
+            !!
+          </span>
+        </div>
+      )}
+
+      {/* Cuarta columna: EyeButton (solo si hay details) */}
       {hasDetails && (
         <div className="flex items-center justify-center flex-shrink-0">
           <EyeButton

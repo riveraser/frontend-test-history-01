@@ -54,6 +54,7 @@ const Paraclinical: React.FC<ParaclinicalProps> = ({ data }) => {
             details={item.details}
             icon={item.icon as IconName}
             iconColor={item.iconColor}
+            hasAlert={item.hasAlert}
             onViewDetails={() => handleViewDetails(item)}
           />
         ))}

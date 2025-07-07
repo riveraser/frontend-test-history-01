@@ -17,6 +17,8 @@
   --widget-text-highlight: #123eaf;
   --widget-detail-button-bg: var(--health-header-bg);
   --widget-text: #4f4f4f;
+  --widget-alert-bg: #fef6d2;
+  --widget-alert-text: #f39505;
 
   /* Colors for "Historial clínico" widget */
   --clinical-header-bg: #04236b;
