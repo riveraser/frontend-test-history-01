@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Widget from "@/components/Widget";
-import EyeButton from "@/components/ui/EyeButton";
+import WidgetItem from "@/components/ui/WidgetItem";
 import type { ParaclinicalItem } from "@/types";
 
 interface ParaclinicalProps {
@@ -27,6 +27,7 @@ const Paraclinical: React.FC<ParaclinicalProps> = ({ data }) => {
         icon="🔬"
         isExpanded={isExpanded}
         onToggle={handleToggle}
+        isExpandable={true}
       >
         <div className="text-center py-4">
           <p className="text-gray-500 text-sm">No hay datos para mostrar</p>
@@ -46,30 +47,14 @@ const Paraclinical: React.FC<ParaclinicalProps> = ({ data }) => {
     >
       <div className="space-y-3">
         {data.map((item) => (
-          <div
+          <WidgetItem
             key={item.id}
-            className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
-          >
-            <div className="flex items-center space-x-3">
-              <span className="text-orange-600">🔬</span>
-              <div className="flex-1">
-                <div className="font-medium text-gray-800 text-sm">
-                  {item.name}
-                </div>
-                <div className="text-gray-600 text-xs">{item.result}</div>
-              </div>
-            </div>
-            <div className="flex items-center space-x-2">
-              {item.hasAlert && (
-                <span className="text-red-500 font-bold">!!</span>
-              )}
-              <EyeButton
-                onClick={() => handleViewDetails(item)}
-                size="sm"
-                title={`Ver detalles de: ${item.name}`}
-              />
-            </div>
-          </div>
+            title={item.name}
+            subtitle={item.result}
+            icon="testTube"
+            iconColor="text-orange-600"
+            onViewDetails={() => handleViewDetails(item)}
+          />
         ))}
       </div>
     </Widget>

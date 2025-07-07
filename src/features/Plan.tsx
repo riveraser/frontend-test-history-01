@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import Widget from "@/components/Widget";
+import WidgetItem from "@/components/ui/WidgetItem";
 import type { PlanItem } from "@/types";
-import EyeButton from "@components/ui/EyeButton";
-import DynamicIcon from "@/components/ui/DynamicIcon";
-import { IconName } from "@/assets/icons";
+
 interface PlanProps {
   data: PlanItem[];
 }
@@ -46,34 +45,15 @@ const Plan: React.FC<PlanProps> = ({ data }) => {
     >
       <div className="space-y-3">
         {data.map((item) => (
-          <div
+          <WidgetItem
             key={item.id}
-            className="widget-item-glow flex items-stretch p-2 bg-gray-50 rounded-sm "
-          >
-            <div className="flex items-center justify-center">
-              <DynamicIcon
-                name={item.icon as IconName}
-                size="lg"
-                className={`${item.iconColor} w-10 h-10`}
-              />
-            </div>
-            <div className="flex items-center justify-center flex-1 px-4">
-              <div className="text-(--widget-text) text-md font-bold text-left">
-                {`${item.name}  ${item.dose}`} <br />
-                {item.posology}
-              </div>
-            </div>
-            {item.details && (
-              <div className="flex items-center justify-center">
-                <EyeButton
-                  onClick={() => handleViewDetails(item)}
-                  size="lg"
-                  title={`Ver detalles de: ${item.name}  ${item.dose}`}
-                  className="!h-full"
-                />
-              </div>
-            )}
-          </div>
+            title={`${item.name} ${item.dose}`}
+            subtitle={item.posology}
+            icon="rxCode"
+            iconColor="text-blue-800"
+            details={item.details}
+            onViewDetails={() => handleViewDetails(item)}
+          />
         ))}
       </div>
     </Widget>
