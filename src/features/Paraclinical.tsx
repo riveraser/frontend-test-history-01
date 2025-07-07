@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Widget from "../components/Widget";
-import EyeButton from "../components/ui/EyeButton";
-import type { ParaclinicalItem } from "../types";
+import Widget from "@/components/Widget";
+import EyeButton from "@/components/ui/EyeButton";
+import type { ParaclinicalItem } from "@/types";
 
 interface ParaclinicalProps {
   data: ParaclinicalItem[];
@@ -42,6 +42,7 @@ const Paraclinical: React.FC<ParaclinicalProps> = ({ data }) => {
       icon="🔬"
       isExpanded={isExpanded}
       onToggle={handleToggle}
+      isExpandable={true}
     >
       <div className="space-y-3">
         {data.map((item) => (

@@ -17,6 +17,7 @@ const AddHealthData: React.FC = () => {
     <Widget
       title="Agregar dato de salud"
       color="bg-(--health-header-bg) text-(--health-header-text)"
+      isExpandable={false}
     >
       {/* Tab Navigation */}
       <div className="bg-(--health-tabs-bg) p-1 rounded-lg mb-4">

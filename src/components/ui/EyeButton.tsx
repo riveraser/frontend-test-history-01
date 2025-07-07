@@ -23,7 +23,7 @@ const EyeButton: React.FC<EyeButtonProps> = ({
   };
 
   const baseClasses =
-    "bg-sky-700 hover:bg-sky-600 text-gray-300 hover:text-gray-50 transition-colors cursor-pointer rounded-full p-2";
+    "bg-(--widget-detail-button-bg) hover:bg-sky-600 text-(--widget-text-highlight) hover:text-gray-50 transition-colors cursor-pointer rounded-sm p-2";
   const disabledClasses = disabled ? "opacity-50 cursor-not-allowed" : "";
   const finalClasses = `${baseClasses} ${disabledClasses} ${className}`;
 

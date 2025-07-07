@@ -24,10 +24,11 @@ const ClinicalHistory: React.FC<ClinicalHistoryProps> = ({ data }) => {
     return (
       <Widget
         title="Historial clínico"
-        color="bg-blue-900"
-        icon="📋"
+        color="bg-(--clinical-header-bg) text-(--clinical-header-text)"
         isExpanded={isExpanded}
         onToggle={handleToggle}
+        isExpandable={true}
+        collapseColor="text-(--clinical-header-bg)"
       >
         <div className="text-center py-4">
           <p className="text-gray-500 text-sm">No hay datos para mostrar</p>
@@ -39,27 +40,35 @@ const ClinicalHistory: React.FC<ClinicalHistoryProps> = ({ data }) => {
   return (
     <Widget
       title="Historial clínico"
-      color="bg-blue-900"
-      icon="📋"
+      color="bg-(--clinical-header-bg) text-(--clinical-header-text)"
       isExpanded={isExpanded}
       onToggle={handleToggle}
+      isExpandable={true}
+      collapseColor="text-(--clinical-header-bg)"
     >
       <div className="space-y-3">
         {data.map((item) => (
           <div
             key={item.id}
-            className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+            className="widget-item-glow flex items-stretch p-2 bg-gray-50 rounded-sm min-h-[80px]"
           >
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center justify-center">
               <DateDisplay date={item.date} />
-              <span className="text-gray-700 text-sm">{item.description}</span>
+            </div>
+            <div className="flex items-center justify-center flex-1 px-4">
+              <div className="text-(--widget-text) text-md font-bold text-left">
+                {item.description}
+              </div>
             </div>
             {item.details && (
-              <EyeButton
-                onClick={() => handleViewDetails(item)}
-                size="md"
-                title={`Ver detalles de: ${item.description}`}
-              />
+              <div className="flex items-center justify-center">
+                <EyeButton
+                  onClick={() => handleViewDetails(item)}
+                  size="md"
+                  title={`Ver detalles de: ${item.description}`}
+                  className="!h-full"
+                />
+              </div>
             )}
           </div>
         ))}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Widget from "../components/Widget";
-import type { TreatmentItem } from "../types";
+import Widget from "@/components/Widget";
+import type { TreatmentItem } from "@/types";
 
 interface CurrentTreatmentProps {
   data: TreatmentItem[];
@@ -36,6 +36,7 @@ const CurrentTreatment: React.FC<CurrentTreatmentProps> = ({ data }) => {
       icon="💊"
       isExpanded={isExpanded}
       onToggle={handleToggle}
+      isExpandable={true}
     >
       <div className="space-y-3">
         {data.map((item) => (

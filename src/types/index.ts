@@ -42,8 +42,10 @@ export interface WidgetProps {
   icon?: string;
   children: React.ReactNode;
   isExpanded?: boolean;
+  isExpandable?: boolean;
   onToggle?: () => void;
   style?: React.CSSProperties;
+  collapseColor?: string;
 }
 
 export interface TabProps {

@@ -14,23 +14,23 @@ import type {
 export const clinicalHistoryData: ClinicalHistoryItem[] = [
   {
     id: "1",
-    date: "15/03/2024",
-    description: "Paciente presenta dolor abdominal agudo",
-    details:
-      "El dolor se localiza en el cuadrante inferior derecho, acompañado de náuseas leves. Se recomienda evaluación quirúrgica.",
+    date: "15/03/2014",
+    description: "Hipertension arterial primaria",
+    details: "Se mantiene tratamiento actual con seguimiento mensual.",
   },
   {
     id: "2",
-    date: "10/03/2024",
-    description: "Control de presión arterial elevada",
+    date: "10/12/2021",
+    description: "Obstruccion intestinal",
     details:
-      "Lectura de 145/95 mmHg. Se mantiene tratamiento actual con seguimiento mensual.",
+      "Se realizó endoscopia de colon y se encontró obstrucción intestinal. Se recomienda tratamiento con medicamentos y seguimiento.",
   },
   {
     id: "3",
-    date: "05/03/2024",
-    description: "Revisión de diabetes tipo 2",
-    // Without details to test the eye button
+    date: "22/01/2024",
+    description: "Trauma en el tobillo izquierdo",
+    details:
+      "Se realizó radiografía de tobillo y se encontró fractura de tobillo. Se recomienda tratamiento con medicamentos y seguimiento.",
   },
 ];
 
@@ -93,6 +93,8 @@ export const paraclinicalData: ParaclinicalItem[] = [
 ];
 
 // Mock data for the "Agregar dato de salud" actions
+// I guess the colors should be in the design system
+// for now I am hardcoding the colors to match the proposed design
 export const actionsAll: AccionItem[] = [
   {
     id: 1,

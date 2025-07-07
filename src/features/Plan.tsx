@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Widget from "../components/Widget";
-import type { PlanItem } from "../types";
+import Widget from "@/components/Widget";
+import type { PlanItem } from "@/types";
 
 interface PlanProps {
   data: PlanItem[];
@@ -36,6 +36,7 @@ const Plan: React.FC<PlanProps> = ({ data }) => {
       icon="📋"
       isExpanded={isExpanded}
       onToggle={handleToggle}
+      isExpandable={true}
     >
       <div className="space-y-3">
         {data.map((item) => (
