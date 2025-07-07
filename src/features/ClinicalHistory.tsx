@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Widget from "@components/Widget";
 import EyeButton from "@components/ui/EyeButton";
+import DateDisplay from "@components/ui/DateDisplay";
 import type { ClinicalHistoryItem } from "@/types";
 
 interface ClinicalHistoryProps {
@@ -49,13 +50,9 @@ const ClinicalHistory: React.FC<ClinicalHistoryProps> = ({ data }) => {
             key={item.id}
             className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
           >
-            <div className="flex-1">
-              <div className="flex items-center space-x-3">
-                <span className="text-gray-500 text-xs">{item.date}</span>
-                <span className="text-gray-700 text-sm">
-                  {item.description}
-                </span>
-              </div>
+            <div className="flex items-center space-x-4">
+              <DateDisplay date={item.date} />
+              <span className="text-gray-700 text-sm">{item.description}</span>
             </div>
             {item.details && (
               <EyeButton
