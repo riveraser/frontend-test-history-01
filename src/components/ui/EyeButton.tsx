@@ -29,6 +29,7 @@ const EyeButton: React.FC<EyeButtonProps> = ({
 
   return (
     <button
+      data-testid="widget-item-details-button"
       onClick={onClick}
       className={finalClasses}
       disabled={disabled}

@@ -22,6 +22,7 @@ const Widget: React.FC<WidgetProps> = ({
         </div>
         {onToggle && isExpandable && (
           <button
+            data-testid="widget-expand-button"
             onClick={isExpandable ? onToggle : undefined}
             className="hover:text-gray-200 transition-opacity bg-white rounded-sm py-1.5 px-4 cursor-pointer hover:opacity-90"
           >
