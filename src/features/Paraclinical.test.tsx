@@ -20,11 +20,11 @@ vi.mock("@/lib/store", () => ({
 import { useUIStore } from "@/lib/store";
 
 describe("Paraclinical", () => {
-  const mockShowSnackbarForItem = vi.fn();
+  const mockShowSnackbar = vi.fn();
 
   beforeEach(() => {
     (useUIStore as any).mockReturnValue({
-      showSnackbarForItem: mockShowSnackbarForItem,
+      showSnackbar: mockShowSnackbar,
     });
   });
 
@@ -66,14 +66,15 @@ describe("Paraclinical", () => {
       expect(detailButtons).toHaveLength(paraclinicalData.length);
     });
 
-    it("should call showSnackbarForItem when clicking on details button", async () => {
+    it("should call showSnackbar when clicking on details button", async () => {
       render(<Paraclinical data={paraclinicalData} />);
       const firstDetailButton = screen.getAllByTestId(
         "widget-item-details-button"
       )[0];
       await userEvent.click(firstDetailButton);
-      expect(mockShowSnackbarForItem).toHaveBeenCalledWith(
-        paraclinicalData[0].name
+      expect(mockShowSnackbar).toHaveBeenCalledWith(
+        `Ver detalles de: ${paraclinicalData[0].name}`,
+        "warning"
       );
     });
 

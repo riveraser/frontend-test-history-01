@@ -10,7 +10,6 @@ interface UIState {
   };
   healthDataTab: HealthDataTab;
   showSnackbar: (message: string, type?: SnackbarType) => void;
-  showSnackbarForItem: (itemTitle: string) => void;
   hideSnackbar: () => void;
   setHealthDataTab: (tab: HealthDataTab) => void;
 }
@@ -30,15 +29,6 @@ export const useUIStore = create<UIState>()(
             isVisible: true,
             message,
             type,
-          },
-        }));
-      },
-      showSnackbarForItem: (itemTitle: string) => {
-        set(() => ({
-          snackbar: {
-            isVisible: true,
-            message: `Ver detalles de: ${itemTitle}`,
-            type: "info",
           },
         }));
       },

@@ -20,11 +20,11 @@ vi.mock("@/lib/store", () => ({
 import { useUIStore } from "@/lib/store";
 
 describe("CurrentTreatment", () => {
-  const mockShowSnackbarForItem = vi.fn();
+  const mockShowSnackbar = vi.fn();
 
   beforeEach(() => {
     (useUIStore as any).mockReturnValue({
-      showSnackbarForItem: mockShowSnackbarForItem,
+      showSnackbar: mockShowSnackbar,
     });
   });
 
@@ -90,7 +90,7 @@ describe("CurrentTreatment", () => {
         expect(detailButtons).toHaveLength(dataWithDetails.length);
       });
 
-      it("should call showSnackbarForItem when clicking on details button", async () => {
+      it("should call showSnackbar when clicking on details button", async () => {
         // Usamos datos con details
         const dataWithDetails = currentTreatmentData.map((item) => ({
           ...item,
@@ -103,7 +103,10 @@ describe("CurrentTreatment", () => {
         await userEvent.click(firstDetailButton);
         const firstItem = dataWithDetails[0];
         const expectedTitle = `${firstItem.name} ${firstItem.dose}`;
-        expect(mockShowSnackbarForItem).toHaveBeenCalledWith(expectedTitle);
+        expect(mockShowSnackbar).toHaveBeenCalledWith(
+          `Ver detalles de: ${expectedTitle}`,
+          "info"
+        );
       });
     });
 

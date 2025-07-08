@@ -20,11 +20,11 @@ vi.mock("@/lib/store", () => ({
 import { useUIStore } from "@/lib/store";
 
 describe("Plan", () => {
-  const mockShowSnackbarForItem = vi.fn();
+  const mockShowSnackbar = vi.fn();
 
   beforeEach(() => {
     (useUIStore as any).mockReturnValue({
-      showSnackbarForItem: mockShowSnackbarForItem,
+      showSnackbar: mockShowSnackbar,
     });
   });
 
@@ -75,7 +75,7 @@ describe("Plan", () => {
       expect(detailButtons).toHaveLength(planData.length);
     });
 
-    it("should call showSnackbarForItem when clicking on details button", async () => {
+    it("should call showSnackbar when clicking on details button", async () => {
       render(<Plan data={planData} />);
 
       const firstDetailButton = screen.getAllByTestId(
@@ -85,7 +85,10 @@ describe("Plan", () => {
 
       const firstItem = planData[0];
       const expectedTitle = `${firstItem.name} ${firstItem.dose}`;
-      expect(mockShowSnackbarForItem).toHaveBeenCalledWith(expectedTitle);
+      expect(mockShowSnackbar).toHaveBeenCalledWith(
+        `Ver detalles de: ${expectedTitle}`,
+        "info"
+      );
     });
 
     it("should be expandable when data is present", async () => {

@@ -28,13 +28,13 @@ const WidgetItem: React.FC<WidgetItemProps> = ({
   subtitleClassName = "",
   hasAlert = false,
 }) => {
-  const { showSnackbarForItem } = useUIStore();
+  const { showSnackbar } = useUIStore();
   const hasDetails = details;
 
   const handleViewDetails = () => {
-    // Simple differentiation between alert and info
-    // TODO: Add a more complex differentiation for Info, Warning, Error, etc.
-    showSnackbarForItem(title, hasAlert);
+    const message = `Ver detalles de: ${title}`;
+    const type = hasAlert ? "warning" : "info";
+    showSnackbar(message, type);
   };
 
   return (
