@@ -3,6 +3,7 @@ import EyeButton from "./EyeButton";
 import DateDisplay from "./DateDisplay";
 import DynamicIcon from "./DynamicIcon";
 import type { IconName } from "@/assets/icons";
+import { useUIStore } from "@/lib/store";
 
 interface WidgetItemProps {
   title: string;
@@ -11,7 +12,6 @@ interface WidgetItemProps {
   icon?: IconName;
   iconColor?: string;
   details?: string;
-  onViewDetails?: () => void;
   className?: string;
   subtitleClassName?: string;
   hasAlert?: boolean;
@@ -24,12 +24,18 @@ const WidgetItem: React.FC<WidgetItemProps> = ({
   icon,
   iconColor,
   details,
-  onViewDetails,
   className = "",
   subtitleClassName = "",
   hasAlert = false,
 }) => {
-  const hasDetails = details && onViewDetails;
+  const { showSnackbarForItem } = useUIStore();
+  const hasDetails = details;
+
+  const handleViewDetails = () => {
+    // Simple differentiation between alert and info
+    // TODO: Add a more complex differentiation for Info, Warning, Error, etc.
+    showSnackbarForItem(title, hasAlert);
+  };
 
   return (
     <div
@@ -69,7 +75,7 @@ const WidgetItem: React.FC<WidgetItemProps> = ({
       {hasDetails && (
         <div className="flex items-center justify-center flex-shrink-0">
           <EyeButton
-            onClick={onViewDetails}
+            onClick={handleViewDetails}
             size="lg"
             title={`Ver detalles de: ${title}`}
             className="!h-full"

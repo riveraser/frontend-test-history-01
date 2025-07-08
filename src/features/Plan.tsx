@@ -6,19 +6,13 @@ import { IconName } from "@/assets/icons";
 
 interface PlanProps {
   data: PlanItem[];
-  onViewDetails?: (item: PlanItem) => void;
 }
 
-const Plan: React.FC<PlanProps> = ({ data, onViewDetails }) => {
+const Plan: React.FC<PlanProps> = ({ data }) => {
   const [isExpanded, setIsExpanded] = useState(true);
 
   const handleToggle = () => {
     setIsExpanded(!isExpanded);
-  };
-
-  const handleViewDetails = (item: PlanItem) => {
-    console.log("Ver detalles de:", item);
-    onViewDetails?.(item);
   };
 
   if (data.length === 0) {
@@ -54,7 +48,6 @@ const Plan: React.FC<PlanProps> = ({ data, onViewDetails }) => {
             icon={item.icon as IconName}
             iconColor={item.iconColor}
             details={item.details}
-            onViewDetails={() => handleViewDetails(item)}
           />
         ))}
       </div>

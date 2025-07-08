@@ -6,19 +6,13 @@ import { IconName } from "@/assets/icons";
 
 interface ParaclinicalProps {
   data: ParaclinicalItem[];
-  onViewDetails?: (item: ParaclinicalItem) => void;
 }
 
-const Paraclinical: React.FC<ParaclinicalProps> = ({ data, onViewDetails }) => {
+const Paraclinical: React.FC<ParaclinicalProps> = ({ data }) => {
   const [isExpanded, setIsExpanded] = useState(true);
 
   const handleToggle = () => {
     setIsExpanded(!isExpanded);
-  };
-
-  const handleViewDetails = (item: ParaclinicalItem) => {
-    console.log("Ver detalles de:", item);
-    onViewDetails?.(item);
   };
 
   if (data.length === 0) {
@@ -56,7 +50,6 @@ const Paraclinical: React.FC<ParaclinicalProps> = ({ data, onViewDetails }) => {
             icon={item.icon as IconName}
             iconColor={item.iconColor}
             hasAlert={item.hasAlert}
-            onViewDetails={() => handleViewDetails(item)}
           />
         ))}
       </div>

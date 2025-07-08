@@ -1,31 +1,51 @@
-import { describe, it, expect, vi, afterEach, afterAll } from "vitest";
+import {
+  describe,
+  it,
+  expect,
+  vi,
+  afterEach,
+  afterAll,
+  beforeEach,
+} from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import CurrentTreatment from "./CurrentTreatment";
 import { currentTreatmentData } from "@/data/mockData";
 
-// Mock console.log to avoid noise in tests since we did not implement the details view
-const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+// Mock the Zustand store
+vi.mock("@/lib/store", () => ({
+  useUIStore: vi.fn(),
+}));
+
+import { useUIStore } from "@/lib/store";
 
 describe("CurrentTreatment", () => {
+  const mockShowSnackbarForItem = vi.fn();
+
+  beforeEach(() => {
+    (useUIStore as any).mockReturnValue({
+      showSnackbarForItem: mockShowSnackbarForItem,
+    });
+  });
+
   afterEach(() => {
-    consoleSpy.mockClear();
+    vi.clearAllMocks();
   });
 
   afterAll(() => {
-    consoleSpy.mockRestore();
+    vi.restoreAllMocks();
   });
 
   describe("Empty State", () => {
     it("should render empty state when no data is provided", () => {
-      render(<CurrentTreatment data={[]} onViewDetails={() => {}} />);
+      render(<CurrentTreatment data={[]} />);
 
       expect(screen.getByText("Tratamiento actual")).toBeInTheDocument();
       expect(screen.getByText("No hay datos para mostrar")).toBeInTheDocument();
     });
 
     it("should be expandable in empty state", async () => {
-      render(<CurrentTreatment data={[]} onViewDetails={() => {}} />);
+      render(<CurrentTreatment data={[]} />);
 
       // The expandable button should have cursor-pointer class
       const expandButton = screen.getByTestId("widget-expand-button");
@@ -35,12 +55,7 @@ describe("CurrentTreatment", () => {
 
   describe("With Data", () => {
     it("should render all treatment items", () => {
-      render(
-        <CurrentTreatment
-          data={currentTreatmentData}
-          onViewDetails={() => {}}
-        />
-      );
+      render(<CurrentTreatment data={currentTreatmentData} />);
 
       expect(screen.getByText("Tratamiento actual")).toBeInTheDocument();
 
@@ -51,14 +66,10 @@ describe("CurrentTreatment", () => {
         expect(screen.getByText(item.posology)).toBeInTheDocument();
       });
     });
+
     describe("Details button:", () => {
       it("should NOT render details button if details prop is missing", () => {
-        render(
-          <CurrentTreatment
-            data={currentTreatmentData}
-            onViewDetails={() => {}}
-          />
-        );
+        render(<CurrentTreatment data={currentTreatmentData} />);
         // No debe haber ningún botón de detalles
         const detailButtons = screen.queryAllByTestId(
           "widget-item-details-button"
@@ -72,43 +83,32 @@ describe("CurrentTreatment", () => {
           ...item,
           details: "Detalle de prueba",
         }));
-        render(
-          <CurrentTreatment data={dataWithDetails} onViewDetails={() => {}} />
-        );
+        render(<CurrentTreatment data={dataWithDetails} />);
         const detailButtons = screen.getAllByTestId(
           "widget-item-details-button"
         );
         expect(detailButtons).toHaveLength(dataWithDetails.length);
       });
 
-      it("should call handleViewDetails when clicking on details button", async () => {
+      it("should call showSnackbarForItem when clicking on details button", async () => {
         // Usamos datos con details
         const dataWithDetails = currentTreatmentData.map((item) => ({
           ...item,
           details: "Detalle de prueba",
         }));
-        const mockOnViewDetails = vi.fn();
-        render(
-          <CurrentTreatment
-            data={dataWithDetails}
-            onViewDetails={mockOnViewDetails}
-          />
-        );
+        render(<CurrentTreatment data={dataWithDetails} />);
         const firstDetailButton = screen.getAllByTestId(
           "widget-item-details-button"
         )[0];
         await userEvent.click(firstDetailButton);
-        expect(mockOnViewDetails).toHaveBeenCalledWith(dataWithDetails[0]);
+        const firstItem = dataWithDetails[0];
+        const expectedTitle = `${firstItem.name} ${firstItem.dose}`;
+        expect(mockShowSnackbarForItem).toHaveBeenCalledWith(expectedTitle);
       });
     });
 
     it("should be expandable when data is present", async () => {
-      render(
-        <CurrentTreatment
-          data={currentTreatmentData}
-          onViewDetails={() => {}}
-        />
-      );
+      render(<CurrentTreatment data={currentTreatmentData} />);
 
       // The expandable button should have cursor-pointer class
       const expandButton = screen.getByTestId("widget-expand-button");
@@ -116,12 +116,7 @@ describe("CurrentTreatment", () => {
     });
 
     it("should display item details correctly", () => {
-      render(
-        <CurrentTreatment
-          data={currentTreatmentData}
-          onViewDetails={() => {}}
-        />
-      );
+      render(<CurrentTreatment data={currentTreatmentData} />);
 
       const firstItem = currentTreatmentData[0];
       const combinedTitle = `${firstItem.name} ${firstItem.dose}`;
@@ -130,12 +125,7 @@ describe("CurrentTreatment", () => {
     });
 
     it("should display icons for treatment items", () => {
-      render(
-        <CurrentTreatment
-          data={currentTreatmentData}
-          onViewDetails={() => {}}
-        />
-      );
+      render(<CurrentTreatment data={currentTreatmentData} />);
 
       // Check that icons are rendered (they should be present as SVG elements)
       currentTreatmentData.forEach((item) => {
