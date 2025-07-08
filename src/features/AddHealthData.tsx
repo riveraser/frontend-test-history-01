@@ -6,7 +6,9 @@ import type { HealthDataTab } from "@/types";
 import { useUIStore } from "@/lib/store";
 
 const AddHealthData: React.FC = () => {
-  const { healthDataTab, setHealthDataTab } = useUIStore();
+  // ✅ OPTIMIZATION: Only re-renders when healthDataTab changes
+  const healthDataTab = useUIStore((state) => state.healthDataTab);
+  const setHealthDataTab = useUIStore((state) => state.setHealthDataTab);
 
   const tabs: HealthDataTab[] = [
     "TODOS",

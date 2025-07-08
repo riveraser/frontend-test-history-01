@@ -24,8 +24,15 @@ describe("Paraclinical", () => {
   const mockShowSnackbar = vi.fn();
 
   beforeEach(() => {
-    (useUIStore as unknown as Mock).mockReturnValue({
-      showSnackbar: mockShowSnackbar,
+    (useUIStore as unknown as Mock).mockImplementation((selector) => {
+      const state = {
+        showSnackbar: mockShowSnackbar,
+        snackbar: { message: "", isVisible: false, type: "info" },
+        healthDataTab: "TODOS",
+        setHealthDataTab: vi.fn(),
+        hideSnackbar: vi.fn(),
+      };
+      return selector ? selector(state) : state;
     });
   });
 

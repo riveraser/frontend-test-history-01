@@ -17,7 +17,10 @@ function App() {
   const currentTreatment = useCurrentTreatment();
   const plan = usePlan();
   const paraclinical = useParaclinical();
-  const { snackbar, hideSnackbar } = useUIStore();
+
+  // ✅ OPTIMIZATION: Only re-renders when snackbar changes
+  const snackbar = useUIStore((state) => state.snackbar);
+  const hideSnackbar = useUIStore((state) => state.hideSnackbar);
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
