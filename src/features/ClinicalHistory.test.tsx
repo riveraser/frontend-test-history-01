@@ -19,14 +19,14 @@ describe("ClinicalHistory", () => {
 
   describe("Empty State", () => {
     it("should render empty state when no data is provided", () => {
-      render(<ClinicalHistory data={[]} />);
+      render(<ClinicalHistory data={[]} onViewDetails={() => {}} />);
 
       expect(screen.getByText("Historial clínico")).toBeInTheDocument();
       expect(screen.getByText("No hay datos para mostrar")).toBeInTheDocument();
     });
 
     it("should be expandable in empty state", async () => {
-      render(<ClinicalHistory data={[]} />);
+      render(<ClinicalHistory data={[]} onViewDetails={() => {}} />);
 
       // The expandable button should have cursor-pointer class
       const expandButton = screen.getByRole("button");
@@ -36,7 +36,9 @@ describe("ClinicalHistory", () => {
 
   describe("With Data", () => {
     it("should render all clinical history items", () => {
-      render(<ClinicalHistory data={clinicalHistoryData} />);
+      render(
+        <ClinicalHistory data={clinicalHistoryData} onViewDetails={() => {}} />
+      );
 
       expect(screen.getByText("Historial clínico")).toBeInTheDocument();
 
@@ -51,7 +53,9 @@ describe("ClinicalHistory", () => {
     });
 
     it("should render correct number of items", () => {
-      render(<ClinicalHistory data={clinicalHistoryData} />);
+      render(
+        <ClinicalHistory data={clinicalHistoryData} onViewDetails={() => {}} />
+      );
 
       // Each item should have a "Ver detalles" button
       const detailButtons = screen.getAllByTestId("widget-item-details-button");
@@ -59,21 +63,26 @@ describe("ClinicalHistory", () => {
     });
 
     it("should call handleViewDetails when clicking on details button", async () => {
-      render(<ClinicalHistory data={clinicalHistoryData} />);
+      const mockOnViewDetails = vi.fn();
+      render(
+        <ClinicalHistory
+          data={clinicalHistoryData}
+          onViewDetails={mockOnViewDetails}
+        />
+      );
 
       const firstDetailButton = screen.getAllByTestId(
         "widget-item-details-button"
       )[0];
       await userEvent.click(firstDetailButton);
 
-      expect(consoleSpy).toHaveBeenCalledWith(
-        "Ver detalles de:",
-        clinicalHistoryData[0]
-      );
+      expect(mockOnViewDetails).toHaveBeenCalledWith(clinicalHistoryData[0]);
     });
 
     it("should be expandable when data is present", async () => {
-      render(<ClinicalHistory data={clinicalHistoryData} />);
+      render(
+        <ClinicalHistory data={clinicalHistoryData} onViewDetails={() => {}} />
+      );
 
       // The expandable button should have cursor-pointer class
       const expandButton = screen.getByTestId("widget-expand-button");
@@ -81,7 +90,9 @@ describe("ClinicalHistory", () => {
     });
 
     it("should display item details correctly", () => {
-      render(<ClinicalHistory data={clinicalHistoryData} />);
+      render(
+        <ClinicalHistory data={clinicalHistoryData} onViewDetails={() => {}} />
+      );
 
       const firstItem = clinicalHistoryData[0];
       expect(screen.getByText(firstItem.description)).toBeInTheDocument();

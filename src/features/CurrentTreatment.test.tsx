@@ -18,14 +18,14 @@ describe("CurrentTreatment", () => {
 
   describe("Empty State", () => {
     it("should render empty state when no data is provided", () => {
-      render(<CurrentTreatment data={[]} />);
+      render(<CurrentTreatment data={[]} onViewDetails={() => {}} />);
 
       expect(screen.getByText("Tratamiento actual")).toBeInTheDocument();
       expect(screen.getByText("No hay datos para mostrar")).toBeInTheDocument();
     });
 
     it("should be expandable in empty state", async () => {
-      render(<CurrentTreatment data={[]} />);
+      render(<CurrentTreatment data={[]} onViewDetails={() => {}} />);
 
       // The expandable button should have cursor-pointer class
       const expandButton = screen.getByTestId("widget-expand-button");
@@ -35,7 +35,12 @@ describe("CurrentTreatment", () => {
 
   describe("With Data", () => {
     it("should render all treatment items", () => {
-      render(<CurrentTreatment data={currentTreatmentData} />);
+      render(
+        <CurrentTreatment
+          data={currentTreatmentData}
+          onViewDetails={() => {}}
+        />
+      );
 
       expect(screen.getByText("Tratamiento actual")).toBeInTheDocument();
 
@@ -48,7 +53,12 @@ describe("CurrentTreatment", () => {
     });
     describe("Details button:", () => {
       it("should NOT render details button if details prop is missing", () => {
-        render(<CurrentTreatment data={currentTreatmentData} />);
+        render(
+          <CurrentTreatment
+            data={currentTreatmentData}
+            onViewDetails={() => {}}
+          />
+        );
         // No debe haber ningún botón de detalles
         const detailButtons = screen.queryAllByTestId(
           "widget-item-details-button"
@@ -62,7 +72,9 @@ describe("CurrentTreatment", () => {
           ...item,
           details: "Detalle de prueba",
         }));
-        render(<CurrentTreatment data={dataWithDetails} />);
+        render(
+          <CurrentTreatment data={dataWithDetails} onViewDetails={() => {}} />
+        );
         const detailButtons = screen.getAllByTestId(
           "widget-item-details-button"
         );
@@ -75,20 +87,28 @@ describe("CurrentTreatment", () => {
           ...item,
           details: "Detalle de prueba",
         }));
-        render(<CurrentTreatment data={dataWithDetails} />);
+        const mockOnViewDetails = vi.fn();
+        render(
+          <CurrentTreatment
+            data={dataWithDetails}
+            onViewDetails={mockOnViewDetails}
+          />
+        );
         const firstDetailButton = screen.getAllByTestId(
           "widget-item-details-button"
         )[0];
         await userEvent.click(firstDetailButton);
-        expect(consoleSpy).toHaveBeenCalledWith(
-          "Ver detalles de:",
-          dataWithDetails[0]
-        );
+        expect(mockOnViewDetails).toHaveBeenCalledWith(dataWithDetails[0]);
       });
     });
 
     it("should be expandable when data is present", async () => {
-      render(<CurrentTreatment data={currentTreatmentData} />);
+      render(
+        <CurrentTreatment
+          data={currentTreatmentData}
+          onViewDetails={() => {}}
+        />
+      );
 
       // The expandable button should have cursor-pointer class
       const expandButton = screen.getByTestId("widget-expand-button");
@@ -96,7 +116,12 @@ describe("CurrentTreatment", () => {
     });
 
     it("should display item details correctly", () => {
-      render(<CurrentTreatment data={currentTreatmentData} />);
+      render(
+        <CurrentTreatment
+          data={currentTreatmentData}
+          onViewDetails={() => {}}
+        />
+      );
 
       const firstItem = currentTreatmentData[0];
       const combinedTitle = `${firstItem.name} ${firstItem.dose}`;
@@ -105,7 +130,12 @@ describe("CurrentTreatment", () => {
     });
 
     it("should display icons for treatment items", () => {
-      render(<CurrentTreatment data={currentTreatmentData} />);
+      render(
+        <CurrentTreatment
+          data={currentTreatmentData}
+          onViewDetails={() => {}}
+        />
+      );
 
       // Check that icons are rendered (they should be present as SVG elements)
       currentTreatmentData.forEach((item) => {
