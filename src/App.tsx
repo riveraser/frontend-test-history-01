@@ -10,15 +10,14 @@ import { useClinicalHistory } from "@hooks/useClinicalHistory";
 import { useCurrentTreatment } from "@hooks/useCurrentTreatment";
 import { usePlan } from "@hooks/usePlan";
 import { useParaclinical } from "@hooks/useParaclinical";
-import { useSnackbar } from "@hooks/useSnackbar";
+import { useUIStore } from "@/lib/store";
 
 function App() {
   const clinicalHistory = useClinicalHistory();
   const currentTreatment = useCurrentTreatment();
   const plan = usePlan();
   const paraclinical = useParaclinical();
-  const { isVisible, message, type, showSnackbar, hideSnackbar } =
-    useSnackbar();
+  const { snackbar, showSnackbar, hideSnackbar } = useUIStore();
 
   // Helper function to show snackbar for view details
   const handleViewDetails = (itemName: string) => {
@@ -106,10 +105,10 @@ function App() {
 
       {/* Snackbar */}
       <Snackbar
-        message={message}
-        isVisible={isVisible}
+        message={snackbar.message}
+        isVisible={snackbar.isVisible}
         onClose={hideSnackbar}
-        type={type}
+        type={snackbar.type}
       />
     </div>
   );

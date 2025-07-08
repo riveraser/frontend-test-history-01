@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import Widget from "@/components/Widget";
 import Tab from "@/components/Tab";
 import TabContent from "@/components/TabContent";
 import type { HealthDataTab } from "@/types";
+import { useUIStore } from "@/lib/store";
 
 const AddHealthData: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<HealthDataTab>("TODOS");
+  const { healthDataTab, setHealthDataTab } = useUIStore();
 
   const tabs: HealthDataTab[] = [
     "TODOS",
@@ -26,15 +27,15 @@ const AddHealthData: React.FC = () => {
             <Tab
               key={tab}
               label={tab}
-              isActive={activeTab === tab}
-              onClick={() => setActiveTab(tab)}
+              isActive={healthDataTab === tab}
+              onClick={() => setHealthDataTab(tab)}
             />
           ))}
         </div>
       </div>
 
       {/* Tab Content */}
-      <TabContent activeTab={activeTab} />
+      <TabContent activeTab={healthDataTab} />
     </Widget>
   );
 };

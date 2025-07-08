@@ -66,3 +66,5 @@ export interface TabProps {
 export interface TabContentProps {
   activeTab: HealthDataTab; // We are passing the type of the tab
 }
+
+export type SnackbarType = "success" | "info" | "warning" | "error";
