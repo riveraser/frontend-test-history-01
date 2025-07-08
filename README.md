@@ -42,6 +42,7 @@ npm install
 - **React 19.1.0** - Biblioteca principal para la interfaz de usuario
 - **React DOM 19.1.0** - Renderizado de React en el navegador
 - **@tanstack/react-query 5.81.5** - Gestión de estado del servidor y caché
+- **Zustand 5.0.6** - Gestión de estado global ligero y eficiente
 
 #### Dependencias de Desarrollo:
 
@@ -84,7 +85,51 @@ npm install -D eslint@9.29.0 @eslint/js@9.29.0 typescript-eslint@8.34.1 eslint-p
 - Reglas específicas para React Hooks y React Refresh
 - Soporte completo para TypeScript
 
-### 5. Configuración de Testing
+### 5. Configuración de Zustand
+
+#### Instalación:
+
+```bash
+npm install zustand@5.0.6
+```
+
+#### Configuración:
+
+- **src/lib/store.ts** - Store global de Zustand para gestión de estado de UI
+- Configuración con DevTools para desarrollo
+- Estado centralizado para snackbar y tabs de salud
+
+#### Características Implementadas:
+
+- **Gestión de Snackbar**: Estado global para notificaciones
+- **Gestión de Tabs**: Estado para pestañas de "Agregar dato de salud"
+- **Selectores Optimizados**: Evita re-renders innecesarios
+
+#### Estructura del Store:
+
+```typescript
+interface UIState {
+  snackbar: {
+    isVisible: boolean;
+    message: string;
+    type: SnackbarType;
+  };
+  healthDataTab: HealthDataTab;
+  showSnackbar: (message: string, type?: SnackbarType) => void;
+  hideSnackbar: () => void;
+  setHealthDataTab: (tab: HealthDataTab) => void;
+}
+```
+
+#### Beneficios de la Implementación:
+
+- **Performance**: Reducción significativa de re-renders innecesarios
+- **Mantenibilidad**: Estado centralizado y predecible
+- **Simplicidad**: API simple y fácil de usar
+- **TypeScript**: Soporte completo de tipos
+- **DevTools**: Herramientas de debugging integradas
+
+### 6. Configuración de Testing
 
 #### Instalación:
 
@@ -145,6 +190,7 @@ Este proyecto está diseñado para implementar componentes de interfaz de usuari
 - **Historial Clínico** - Visualización de antecedentes médicos
 - **Tratamiento Actual** - Seguimiento de medicamentos y tratamientos
 - **Paraclínicos** - Resultados de exámenes de laboratorio
+- **Gestión de Estado Global** - Estado centralizado con Zustand para UI y React Query para datos del servidor
 
 ## 🛠️ Scripts Disponibles
 
@@ -189,6 +235,7 @@ _Panama_
 - React 19 + TypeScript
 - Vite + Tailwind CSS
 - ESLint + Testing Library
+- Zustand + React Query
 
 ---
 
