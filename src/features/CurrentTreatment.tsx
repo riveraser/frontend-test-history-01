@@ -6,22 +6,13 @@ import { IconName } from "@/assets/icons";
 
 interface CurrentTreatmentProps {
   data: TreatmentItem[];
-  onViewDetails?: (item: TreatmentItem) => void;
 }
 
-const CurrentTreatment: React.FC<CurrentTreatmentProps> = ({
-  data,
-  onViewDetails,
-}) => {
+const CurrentTreatment: React.FC<CurrentTreatmentProps> = ({ data }) => {
   const [isExpanded, setIsExpanded] = useState(true);
 
   const handleToggle = () => {
     setIsExpanded(!isExpanded);
-  };
-
-  const handleViewDetails = (item: TreatmentItem) => {
-    console.log("Ver detalles de:", item);
-    onViewDetails?.(item);
   };
 
   if (data.length === 0) {
@@ -58,7 +49,6 @@ const CurrentTreatment: React.FC<CurrentTreatmentProps> = ({
             icon={item.icon as IconName}
             iconColor={item.iconColor}
             details={item.details}
-            onViewDetails={() => handleViewDetails(item)}
           />
         ))}
       </div>

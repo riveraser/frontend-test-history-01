@@ -5,22 +5,13 @@ import type { ClinicalHistoryItem } from "@/types";
 
 interface ClinicalHistoryProps {
   data: ClinicalHistoryItem[];
-  onViewDetails?: (item: ClinicalHistoryItem) => void;
 }
 
-const ClinicalHistory: React.FC<ClinicalHistoryProps> = ({
-  data,
-  onViewDetails,
-}) => {
+const ClinicalHistory: React.FC<ClinicalHistoryProps> = ({ data }) => {
   const [isExpanded, setIsExpanded] = useState(true);
 
   const handleToggle = () => {
     setIsExpanded(!isExpanded);
-  };
-
-  const handleViewDetails = (item: ClinicalHistoryItem) => {
-    console.log("Ver detalles de:", item);
-    onViewDetails?.(item);
   };
 
   if (data.length === 0) {
@@ -56,7 +47,6 @@ const ClinicalHistory: React.FC<ClinicalHistoryProps> = ({
             title={item.description}
             date={item.date}
             details={item.details}
-            onViewDetails={() => handleViewDetails(item)}
           />
         ))}
       </div>

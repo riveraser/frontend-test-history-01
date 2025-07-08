@@ -10,20 +10,17 @@ import { useClinicalHistory } from "@hooks/useClinicalHistory";
 import { useCurrentTreatment } from "@hooks/useCurrentTreatment";
 import { usePlan } from "@hooks/usePlan";
 import { useParaclinical } from "@hooks/useParaclinical";
-import { useSnackbar } from "@hooks/useSnackbar";
+import { useUIStore } from "@/lib/store";
 
 function App() {
   const clinicalHistory = useClinicalHistory();
   const currentTreatment = useCurrentTreatment();
   const plan = usePlan();
   const paraclinical = useParaclinical();
-  const { isVisible, message, type, showSnackbar, hideSnackbar } =
-    useSnackbar();
 
-  // Helper function to show snackbar for view details
-  const handleViewDetails = (itemName: string) => {
-    showSnackbar(`Ver detalles de: ${itemName}`, "info");
-  };
+  // ✅ OPTIMIZATION: Only re-renders when snackbar changes
+  const snackbar = useUIStore((state) => state.snackbar);
+  const hideSnackbar = useUIStore((state) => state.hideSnackbar);
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
@@ -45,12 +42,7 @@ function App() {
                 ) : clinicalHistory.error ? (
                   <ErrorMessage message="Error al cargar el historial clínico" />
                 ) : (
-                  <ClinicalHistory
-                    data={clinicalHistory.data || []}
-                    onViewDetails={(item) =>
-                      handleViewDetails(item.description)
-                    }
-                  />
+                  <ClinicalHistory data={clinicalHistory.data || []} />
                 )}
               </div>
 
@@ -61,12 +53,7 @@ function App() {
                 ) : plan.error ? (
                   <ErrorMessage message="Error al cargar el plan" />
                 ) : (
-                  <Plan
-                    data={plan.data || []}
-                    onViewDetails={(item) =>
-                      handleViewDetails(`${item.name} ${item.dose}`)
-                    }
-                  />
+                  <Plan data={plan.data || []} />
                 )}
               </div>
 
@@ -77,12 +64,7 @@ function App() {
                 ) : currentTreatment.error ? (
                   <ErrorMessage message="Error al cargar el tratamiento actual" />
                 ) : (
-                  <CurrentTreatment
-                    data={currentTreatment.data || []}
-                    onViewDetails={(item) =>
-                      handleViewDetails(`${item.name} ${item.dose}`)
-                    }
-                  />
+                  <CurrentTreatment data={currentTreatment.data || []} />
                 )}
               </div>
 
@@ -93,10 +75,7 @@ function App() {
                 ) : paraclinical.error ? (
                   <ErrorMessage message="Error al cargar los paraclínicos" />
                 ) : (
-                  <Paraclinical
-                    data={paraclinical.data || []}
-                    onViewDetails={(item) => handleViewDetails(item.name)}
-                  />
+                  <Paraclinical data={paraclinical.data || []} />
                 )}
               </div>
             </div>
@@ -106,10 +85,10 @@ function App() {
 
       {/* Snackbar */}
       <Snackbar
-        message={message}
-        isVisible={isVisible}
+        message={snackbar.message}
+        isVisible={snackbar.isVisible}
         onClose={hideSnackbar}
-        type={type}
+        type={snackbar.type}
       />
     </div>
   );

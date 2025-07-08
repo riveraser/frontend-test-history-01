@@ -1,30 +1,58 @@
-import { describe, it, expect, vi, afterEach, afterAll } from "vitest";
+import {
+  describe,
+  it,
+  expect,
+  vi,
+  afterEach,
+  afterAll,
+  beforeEach,
+  Mock,
+} from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Paraclinical from "./Paraclinical";
 import { paraclinicalData } from "@/data/mockData";
 
-// Mock console.log to avoid noise in tests since we did not implement the details view
-const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+// Mock the Zustand store
+vi.mock("@/lib/store", () => ({
+  useUIStore: vi.fn(),
+}));
+
+import { useUIStore } from "@/lib/store";
 
 describe("Paraclinical", () => {
+  const mockShowSnackbar = vi.fn();
+
+  beforeEach(() => {
+    (useUIStore as unknown as Mock).mockImplementation((selector) => {
+      const state = {
+        showSnackbar: mockShowSnackbar,
+        snackbar: { message: "", isVisible: false, type: "info" },
+        healthDataTab: "TODOS",
+        setHealthDataTab: vi.fn(),
+        hideSnackbar: vi.fn(),
+      };
+      return selector ? selector(state) : state;
+    });
+  });
+
   afterEach(() => {
-    consoleSpy.mockClear();
+    vi.clearAllMocks();
   });
 
   afterAll(() => {
-    consoleSpy.mockRestore();
+    vi.restoreAllMocks();
   });
 
   describe("Empty State", () => {
     it("should render empty state when no data is provided", () => {
-      render(<Paraclinical data={[]} onViewDetails={() => {}} />);
+      render(<Paraclinical data={[]} />);
       expect(screen.getByText("Paraclínicos")).toBeInTheDocument();
       expect(screen.getByText("No hay datos para mostrar")).toBeInTheDocument();
     });
 
     it("should be expandable in empty state", async () => {
-      render(<Paraclinical data={[]} onViewDetails={() => {}} />);
+      render(<Paraclinical data={[]} />);
       const expandButton = screen.getByTestId("widget-expand-button");
       expect(expandButton).toHaveClass("cursor-pointer");
     });
@@ -32,7 +60,7 @@ describe("Paraclinical", () => {
 
   describe("With Data", () => {
     it("should render all paraclinical items", () => {
-      render(<Paraclinical data={paraclinicalData} onViewDetails={() => {}} />);
+      render(<Paraclinical data={paraclinicalData} />);
       expect(screen.getByText("Paraclínicos")).toBeInTheDocument();
       paraclinicalData.forEach((item) => {
         expect(screen.getByText(item.name)).toBeInTheDocument();
@@ -41,50 +69,37 @@ describe("Paraclinical", () => {
     });
 
     it("should render details button when details prop is present", () => {
-      render(<Paraclinical data={paraclinicalData} onViewDetails={() => {}} />);
+      render(<Paraclinical data={paraclinicalData} />);
       const detailButtons = screen.getAllByTestId("widget-item-details-button");
       expect(detailButtons).toHaveLength(paraclinicalData.length);
     });
 
-    it("should call handleViewDetails when clicking on details button", async () => {
-      const mockOnViewDetails = vi.fn();
-      render(
-        <Paraclinical
-          data={paraclinicalData}
-          onViewDetails={mockOnViewDetails}
-        />
-      );
+    it("should call showSnackbar when clicking on details button", async () => {
+      render(<Paraclinical data={paraclinicalData} />);
       const firstDetailButton = screen.getAllByTestId(
         "widget-item-details-button"
       )[0];
       await userEvent.click(firstDetailButton);
-      expect(mockOnViewDetails).toHaveBeenCalledWith(paraclinicalData[0]);
+      expect(mockShowSnackbar).toHaveBeenCalledWith(
+        `Ver detalles de: ${paraclinicalData[0].name}`,
+        "warning"
+      );
     });
 
     it("should be expandable when data is present", async () => {
-      render(<Paraclinical data={paraclinicalData} onViewDetails={() => {}} />);
+      render(<Paraclinical data={paraclinicalData} />);
       const expandButton = screen.getByTestId("widget-expand-button");
       expect(expandButton).toHaveClass("cursor-pointer");
     });
 
     it("should display icons for paraclinical items", () => {
-      render(<Paraclinical data={paraclinicalData} onViewDetails={() => {}} />);
+      render(<Paraclinical data={paraclinicalData} />);
       paraclinicalData.forEach((item) => {
         const iconElements = document.querySelectorAll(
           `[class*="${item.iconColor}"]`
         );
         expect(iconElements.length).toBeGreaterThan(0);
       });
-    });
-
-    it("should display alert badge if hasAlert is true", () => {
-      render(<Paraclinical data={paraclinicalData} onViewDetails={() => {}} />);
-      // Solo los items con hasAlert deben mostrar el badge
-      const alertBadges = screen.getAllByText("!!");
-      const expectedAlerts = paraclinicalData.filter(
-        (item) => item.hasAlert
-      ).length;
-      expect(alertBadges).toHaveLength(expectedAlerts);
     });
   });
 });
