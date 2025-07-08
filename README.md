@@ -232,3 +232,25 @@ export default tseslint.config([
   },
 ]);
 ```
+
+---
+
+## 👨‍💻 Desarrollador
+
+**Sergio Rivera**  
+_Frontend Developer_
+_Panama_
+
+- **GitHub:** [@srivera](https://github.com/riveraser)
+- **LinkedIn:** [Santiago Rivera](https://linkedin.com/in/sergio-rivera-morales)
+- **Email:** sergi.erm@gmail.com
+
+### 🛠️ Tecnologías Utilizadas en este Proyecto
+
+- React 19 + TypeScript
+- Vite + Tailwind CSS
+- ESLint + Testing Library
+
+---
+
+_Proyecto desarrollado como parte de prueba en React para Startup._
