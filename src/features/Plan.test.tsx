@@ -6,6 +6,7 @@ import {
   afterEach,
   afterAll,
   beforeEach,
+  Mock,
 } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -23,7 +24,7 @@ describe("Plan", () => {
   const mockShowSnackbar = vi.fn();
 
   beforeEach(() => {
-    (useUIStore as any).mockReturnValue({
+    (useUIStore as unknown as Mock).mockReturnValue({
       showSnackbar: mockShowSnackbar,
     });
   });
