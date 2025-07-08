@@ -10,7 +10,7 @@ interface UIState {
   };
   healthDataTab: HealthDataTab;
   showSnackbar: (message: string, type?: SnackbarType) => void;
-  showSnackbarForItem: (itemTitle: string, hasAlert: boolean) => void;
+  showSnackbarForItem: (itemTitle: string) => void;
   hideSnackbar: () => void;
   setHealthDataTab: (tab: HealthDataTab) => void;
 }
@@ -33,13 +33,12 @@ export const useUIStore = create<UIState>()(
           },
         }));
       },
-      showSnackbarForItem: (itemTitle: string, hasAlert: boolean) => {
-        const type = hasAlert ? "warning" : "info";
+      showSnackbarForItem: (itemTitle: string) => {
         set(() => ({
           snackbar: {
             isVisible: true,
             message: `Ver detalles de: ${itemTitle}`,
-            type,
+            type: "info",
           },
         }));
       },
