@@ -172,67 +172,6 @@ El proyecto incluye la implementación de los siguientes criterios de aceptació
 8. **AC8**: Formato de ítem en "Paraclínicos"
 9. **AC9**: Renderizado de contenido dinámico
 
-## 🔧 Configuración Avanzada de ESLint
-
-Para desarrollo en producción, se recomienda actualizar la configuración para habilitar reglas de linting con tipos:
-
-```js
-export default tseslint.config([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
-
-También puedes instalar [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) y [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) para reglas específicas de React:
-
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
-
-export default tseslint.config([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
-
 ---
 
 ## 👨‍💻 Desarrollador
@@ -241,8 +180,8 @@ export default tseslint.config([
 _Frontend Developer_
 _Panama_
 
-- **GitHub:** [@srivera](https://github.com/riveraser)
-- **LinkedIn:** [Santiago Rivera](https://linkedin.com/in/sergio-rivera-morales)
+- **GitHub:** [@riveraser](https://github.com/riveraser)
+- **LinkedIn:** [Sergio Rivera](https://linkedin.com/in/sergio-rivera-morales)
 - **Email:** sergi.erm@gmail.com
 
 ### 🛠️ Tecnologías Utilizadas en este Proyecto
